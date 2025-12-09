@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validation Report</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 2em; background-color: #f9fafb; color: #111827; }
+        h1 { color: #1f2937; }
+        table { border-collapse: collapse; width: 100%; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; }
+        th, td { border: 1px solid #e5e7eb; padding: 12px 15px; text-align: left; }
+        th { background-color: #f3f4f6; font-weight: 600; }
+        tr:nth-child(even) { background-color: #f9fafb; }
+        .status-Fail { background-color: #fee2e2; }
+        .status-Pass { background-color: #dcfce7; }
+        .severity-E { font-weight: bold; color: #991b1b; }
+        .severity-W { color: #9a3412; }
+    </style>
+</head>
+<body>
+    <h1>Validation Report</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Rule ID</th>
+                <th>Status</th>
+                <th>Severity</th>
+                <th>Row</th>
+                <th>Column</th>
+                <th>Message</th>
+                <th>Expected</th>
+                <th>Actual Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr class="status-Pass">
+                <td>M-001</td>
+                <td>Pass</td>
+                <td class="severity-E">E</td>
+                <td>ProductMDMBulkReplicateRequestMessage.ProductMDMReplicateRequestMessage.Product</td>
+                <td>ProductInternalID</td>
+                <td>Field 'ProductInternalID' matches expected type 'CHAR'.</td>
+                <td>CHAR</td>
+                <td>920-94-354</td>
+            </tr>
+            
+            <tr class="status-Pass">
+                <td>M-001</td>
+                <td>Pass</td>
+                <td class="severity-E">E</td>
+                <td>ProductMDMBulkReplicateRequestMessage.ProductMDMReplicateRequestMessage.Product</td>
+                <td>ProductInternalID</td>
+                <td>Field 'ProductInternalID' is present.</td>
+                <td>Value must be present</td>
+                <td>920-94-354</td>
+            </tr>
+            
+            <tr class="status-Pass">
+                <td>M-001</td>
+                <td>Pass</td>
+                <td class="severity-E">E</td>
+                <td>ProductMDMBulkReplicateRequestMessage.ProductMDMReplicateRequestMessage.Product</td>
+                <td>ProductInternalID</td>
+                <td>Length of 'ProductInternalID' within allowed maximum 18.</td>
+                <td>18</td>
+                <td>920-94-354</td>
+            </tr>
+            
+            <tr class="status-Pass">
+                <td>M-001</td>
+                <td>Pass</td>
+                <td class="severity-E">E</td>
+                <td>ProductMDMBulkReplicateRequestMessage.ProductMDMReplicateRequestMessage.Product</td>
+                <td>ProductInternalID</td>
+                <td>Values match for 'ProductInternalID' and 'ReceiverProductInternalID'.</td>
+                <td>920-94-354</td>
+                <td>920-94-354</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+</body>
+</html>

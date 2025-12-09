@@ -1,0 +1,1956 @@
+meta:
+  version: '1.0'
+  system: "Agile \u2192 SAP MDG"
+  description: Validation & mapping rules derived from artifacts/Agile_MDG_Mapping.xlsx
+rules:
+- id: NA-001
+  name: (Not coming from Agile)
+  severity: E
+  description: <PlantID>9200</PlantID>
+- id: ACT-001
+  name: ACTIVE PASSIVE
+  source_field: ACTIVE_PASSIVE
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-ACTIVE_PASSIVE (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: ADD-001
+  name: ADD BULK WEIGHT
+  source_field: ADDITIONAL_BULK_WEIGHT_G
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 70
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-ADD_BULK_WEIGHT (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: ALT-001
+  name: ALTERNATIVE HIBERNATE OPN
+  source_field: ALTERNATIVE_HIBERNATE_OPN
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 70
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-ALTERNATIVE_HIBERNATE_OPN (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: APP-001
+  name: APPROVED REVISIONS FOR MFR
+  source_field: APPROVED_REVISIONS_FOR_MFR
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-APPROVED_REVISIONS_FOR_MFR (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: APP-002
+  name: APPROVED REVISIONS TO SHIP
+  source_field: APPROVED_REVISIONS_TO_SHIP
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 150
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-APPROVED_REVISIONS_TO_SHIP (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: AWG-001
+  name: AWG
+  source_field: AWG
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-AWG (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: AAG-001
+  name: Account Assignment Group
+  source_field: nv_classification_attribute (ACCT_ASSIGNMENT_GRP)
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 2
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA_SW_SERVICE'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - ACCT_ASSIGNMENT_GRP (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA_SW_SERVICE
+- id: AR-001
+  name: Accounting Rule
+  source_field: ACCOUNTING_RULE
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-ACCOUNTING_RULE (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: ARR-001
+  name: Advance Return RMA SLA
+  source_field: ADVANCE_RETURN_RMA_SLA
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA_SW_SERVICE'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - ADVANCE_RETURN_RMA_SLA (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA_SW_SERVICE
+- id: ALC-001
+  name: Agile LC status
+  source_field: AGILE_LC
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA-MATERIAL'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - MX_AGILE_LC_STATUS (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA-MATERIAL
+- id: APT-001
+  name: Agile Part Type
+  source_field: AGILE_PART_TYPE
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-AGILE_PART_TYPE (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: BAS-001
+  name: BASED ON OPN
+  source_field: BASED_ON_OPN
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-BASED_ON_OPN (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: BRA-001
+  name: BRACKET
+  source_field: BRACKET
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 150
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-BRACKET (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: BUL-001
+  name: BULK QTY
+  source_field: BULK_QTY
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 70
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-BULK_QTY (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: BUM-001
+  name: 'Base Unit of Measure '
+  xpath: //Product/BaseMeasureUnitCode
+  type: UNIT
+  required: true
+  max_length: 3
+  severity: E
+  description: Default 'EA'
+  target:
+    structure: MARA_SRC
+    field: MEINS
+- id: BM-001
+  name: Basic Material
+  source_field: AGILE_ITEM_CODE
+  xpath: //Product/BasicProductCode
+  type: CHAR
+  required: true
+  max_length: 48
+  severity: E
+  description: As-Is
+  target:
+    structure: MARA_SRC
+    field: WRKST
+- id: BLM-001
+  name: Business Line - MLNX
+  source_field: BUSINESS_LINE
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 3
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA-MATERIAL'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - MX_BUSINESSLINE (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)
+
+    Map the field attribute in ZZFIELDNAME-ZZBUSLINE (Product->BASIC_DATA3-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->BASIC_DATA3-ZZFIELDVALUE)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA-MATERIAL
+- id: BU-001
+  name: Business Unit
+  source_field: BUSINESS_UNIT
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 2
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA-MATERIAL'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - MX_BUSINESS_UNIT (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)
+
+    Map the field attribute in ZZFIELDNAME-ZZBUSUNIT (Product->BASIC_DATA3-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->BASIC_DATA3-ZZFIELDVALUE)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA-MATERIAL
+- id: CAB-001
+  name: CABLE TYPE
+  source_field: CABLE_TYPE
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-CABLE_TYPE (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: CM-001
+  name: CM
+  source_field: CM_USER
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 70
+  severity: E
+  description: 'Map the field attribute in ZZFIELDNAME-CM (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+
+    Map the field attribute in ZZFIELDNAME-CM (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)'
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: CPU-001
+  name: CPU TYPE
+  source_field: CPU_TYPE
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 70
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-CPU_TYPE (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: CRY-001
+  name: CRYPTO
+  source_field: CRYPTO
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 70
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-CRYPTO (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: CUS-001
+  name: CUSTOMER PN
+  source_field: CUSTOMER_PN
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: 'Map the field attribute in ZZFIELDNAME-CUSTOMER_PN (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+
+    Map the field attribute in ZZFIELDNAME-ZZCUSTPN (Product->BASIC_DATA3-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->BASIC_DATA3-ZZFIELDVALUE)'
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: CUS-002
+  name: CUSTOMER VERSION
+  source_field: CUSTOMER_VERSION
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: 'Map the field attribute in ZZFIELDNAME-CUSTOMER_VERSION (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+
+    Map the field attribute in ZZFIELDNAME-ZZCUSTVER (Product->BASIC_DATA3-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->BASIC_DATA3-ZZFIELDVALUE)'
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: CUS-003
+  name: CUSTOMER_NEED_TO_APP
+  source_field: CUSTOMER_NEED_TO_APP_FAI
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-CUSTOMER_NEED_TO_APP_FAI (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: CLM-001
+  name: Cable Length - MLNX
+  source_field: CABLE_LENGTH
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA-MATERIAL'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - MX_CABLELENGTH (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA-MATERIAL
+- id: CN-001
+  name: Change Number
+  xpath: "//ECO_DATA\_/ZZAENNR"
+  type: CHAR
+  required: true
+  max_length: 12
+  severity: E
+  description: "Map  from 'LATEST REVISION' (Starting from 4th Character and Trim if there are spaces) field value attribute in ZZAENNR (Product->ECO_DATA\_)"
+- id: COO-001
+  name: Country Of Origin
+  source_field: COO
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 100
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-COO (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: CI-001
+  name: Cumulus Indicator
+  source_field: CUMULUS_INDICATOR
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 2
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA_SW_SERVICE'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - CUMULUS_INDICATOR (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA_SW_SERVICE
+- id: C-001
+  name: Customer
+  source_field: CUSTOMER_NAME
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: 'Map the field attribute in ZZFIELDNAME-CUSTOMER (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+
+    Map the field attribute in ZZFIELDNAME-ZZCUSTNAM (Product->BASIC_DATA3-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->BASIC_DATA3-ZZFIELDVALUE)'
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: DUA-001
+  name: DUAL PORT SINGLE PORT
+  source_field: DUAL_PORT_SINGLE_PORT
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-DUAL_PORT_SINGLE_PORT (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: DT-001
+  name: Default Term
+  source_field: DEFAULT_TERM
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: NUM
+  required: true
+  max_length: 2
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA_SW_SERVICE'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - TERM (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA_SW_SERVICE
+- id: DL-001
+  name: Dual License check
+  source_field: DUAL_LICENSE_CHECK
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA_SW_SERVICE'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - DUAL_LICENSE_CHECK (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA_SW_SERVICE
+- id: D-001
+  name: Duration of the support
+  source_field: MONTH_DURATION
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA-MATERIAL'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - MX_MONTHS_DURATION (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA-MATERIAL
+- id: EAN-001
+  name: EAN Category
+  source_field: MARA_NUMTP
+  xpath: //Product/GlobalTradeItemNumber/ProductStandardVariantID/ProductStandardVariantID
+  type: CHAR
+  required: true
+  max_length: 2
+  severity: E
+  description: As-Is
+  target:
+    structure: MARA_SRC
+    field: NUMTP
+- id: EAN-002
+  name: EAN/UPC
+  source_field: EAN_CODE
+  xpath: //Product/GlobalTradeItemNumber/ProductStandardID/ProductStandardID
+  type: CHAR
+  required: true
+  max_length: 18
+  severity: E
+  description: '1.Map the field attribute value in ProductStandardID(Product->GlobalTradeItemNumber->ProductStandardID)
+
+    2.Default below values when when ProductStandardID is not blank ,
+
+    (A)Default ProductStandardVariantID as ''MX'' (Product->GlobalTradeItemNumber->ProductStandardVariantID )
+
+    (B)Default MeasureUnitCode as ''EA'' (Product->GlobalTradeItemNumber->ProductStandardVariantID)
+
+    (C) DefaultProductStandardMainIndicator as ''True'' (Product->GlobalTradeItemNumber->ProductStandardMainIndicator )'
+  target:
+    structure: MARA_SRC
+    field: EAN11
+- id: ECC-001
+  name: ECCN
+  source_field: ECCN
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-ECCN (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: EMS-001
+  name: EMS Catalog ID
+  source_field: FLEXERA_CATALOG_ID
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA_SW_SERVICE'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - FULFIL_CATALOG_ID (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA_SW_SERVICE
+- id: END-001
+  name: END OF SUPPORT DATE
+  source_field: END_OF_SUPPORT_DATE
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-END_OF_SUPPORT_DATE (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: EOL-001
+  name: EOL Change Date
+  source_field: EOL_STATUS_CHANGE_DATE
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-EOL_STATUS_CHANGE_DATE (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: ERP-001
+  name: ERP SUB ASSY
+  source_field: ERP_SUB_ASSY
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA-MATERIAL'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - ERP_SUB_ASSY (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)
+
+    Map the field attribute in ZZFIELDNAME- ZZSUBASSY (Product->BASIC_DATA3-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->BASIC_DATA3-ZZFIELDVALUE)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA-MATERIAL
+- id: ETH-001
+  name: ETH Data Rate - MLNX
+  source_field: ETH_DATA_RATE
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA-MATERIAL'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - MX_ETH_DATARATE (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA-MATERIAL
+- id: EGP-001
+  name: Entitlement Grace Period
+  source_field: ENTITLEMENT_GRACE_PERIOD
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: NUM
+  required: true
+  max_length: 2
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA_SW_SERVICE'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - ENT_GRACE_PERIOD (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA_SW_SERVICE
+- id: EM-001
+  name: Entitlement Model
+  source_field: ENTITLEMENT_MODEL
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA_SW_SERVICE'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - ENTITLEMENT_MODEL (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA_SW_SERVICE
+- id: EC-001
+  name: Environmental Compliance
+  source_field: COMPLIANCE
+  xpath: //Product/MARA_ADDL_DATA/ZZENVC/ZZENVC
+  type: CHAR
+  required: true
+  max_length: 1
+  severity: E
+  description: 'As-Is
+
+    Default ''AGILE'''
+  target:
+    structure: MARA_SRC
+    field: ZENVC
+- id: FAI-001
+  name: FAI
+  source_field: REQUIRED_FAI
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 70
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-FAI (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: FIR-001
+  name: FIRMWARE
+  source_field: FIRMWARE
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 150
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-FIRMWARE (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: FQ-001
+  name: Fulfilment Quantity
+  source_field: FULLFILMENT_QUANTITY
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: NUM
+  required: true
+  max_length: 5
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA_SW_SERVICE'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - FULFIL_QUANTITY (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA_SW_SERVICE
+- id: GEN-001
+  name: GENERIC OPN
+  source_field: GENERIC_OPN
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 70
+  severity: E
+  description: 'Map the field attribute in ZZFIELDNAME-GENERIC_OPN (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+
+    Map the field attribute in ZZFIELDNAME- ZZGENOPN (Product->BASIC_DATA3-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->BASIC_DATA3-ZZFIELDVALUE)'
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: GW-001
+  name: Gross Weight
+  source_field: PRODUCT_WEIGHT_G
+  xpath: //Product/QuantityCharacteristic/Product/QuantityCharacteristic/CharacteristicQuantity
+  type: QUAN
+  required: true
+  max_length: 13
+  severity: E
+  description: '1.Default Quantity as ''EA'' (Product->QuantityCharacteristic->Quantity) and unitCode as ''1.0''
+
+    2. Default CharacteristicQuantity as ''GRM'' (Product->QuantityCharacteristic->CharacteristicQuantity) and Map the attribute value in unitCode
+
+    3. Default CharacteristicQuantityTypeCode as ''GROSS_WT'' (Product->QuantityCharacteristic->CharacteristicQuantityTypeCode)'
+  target:
+    structure: MARA_SRC
+    field: BRGEW
+- id: HAR-001
+  name: HARMONIZED TAARIF
+  source_field: HARMONIZED_TAARIF
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 70
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-HARMONIZED_TAARIF (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: HCA-001
+  name: HCA_PCIE_BUS_WIDTH
+  source_field: HCA_PCIE_BUS_WIDTH
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-HCA_PCIE_BUS_WIDTH (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: HCA-002
+  name: HCA_SINGLE_MULTI_HOS
+  source_field: HCA_SINGLE_MULTI_HOST
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-HCA_SINGLE_MULTI_HOST (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: HOS-001
+  name: HOST COUNT
+  source_field: HOST_COUNT
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-HOST_COUNT (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: HWS-001
+  name: HW / SW Support
+  source_field: HW_SW_SUPPORT
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-HW_SW_SUPPORT (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: HFF-001
+  name: Halogen Free Flag
+  source_field: HALOGEN_FREE
+  xpath: //Product/MARA_ADDL_DATA/ZZHLGN/ZZHLGN
+  type: CHAR
+  required: true
+  max_length: 2
+  severity: E
+  description: As-Is
+  target:
+    structure: MARA_SRC
+    field: ZZHLGN
+- id: IBD-001
+  name: IB Data Rate - MLNX
+  source_field: DATA_RATE
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA-MATERIAL'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - MX_DATARATE (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)
+
+    1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA-MATERIAL'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - MX_DATARATE (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA-MATERIAL
+- id: IC-001
+  name: IC
+  source_field: IC
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 150
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-IC (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: ICI-001
+  name: IC Included Family - MLNX
+  source_field: IC_INCLUDED_FAMILY
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 4
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA-MATERIAL'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - MX_ICINCLUDEDFAMILY (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)
+
+    Map the field attribute in ZZFIELDNAME-ZZICFAM (Product->BASIC_DATA3-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->BASIC_DATA3-ZZFIELDVALUE)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA-MATERIAL
+- id: ICI-002
+  name: IC Included Mkt Desc - MLNX
+  source_field: IC_INCLUDED_MKT_DESC
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 4
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA-MATERIAL'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - MX_ICINCLUDEDMKTDESC (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)
+
+    Map the field attribute in ZZFIELDNAME-ZZICDESC (Product->BASIC_DATA3-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->BASIC_DATA3-ZZFIELDVALUE)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA-MATERIAL
+- id: ICI-003
+  name: IC Included Type
+  source_field: IC_INCLUDED_TYPE
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 4
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA-MATERIAL'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - MX_ICINCLUDEDTYPE (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)
+
+    Map the field attribute in ZZFIELDNAME-ZZICTYPE (Product->BASIC_DATA3-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->BASIC_DATA3-ZZFIELDVALUE)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA-MATERIAL
+- id: ID-001
+  name: ID
+  xpath: //MessageHeader/ID
+  severity: E
+  description: MessageHeader->ID
+- id: IO-001
+  name: IO
+  source_field: IO
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-IO (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: ISR-001
+  name: ISR HARMONIZED TAARIF
+  source_field: ISR_HARMONIZED_TAARIF
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-ISR_HARMONIZED_TAARIF (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: I-001
+  name: Invoice rule
+  source_field: INVOICE_RULE
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-INVOICE_RULE (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: IFM-001
+  name: Item Family - MLNX
+  source_field: ITEM_FAMILY
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 2
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA-MATERIAL'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - MX_ITEM_FAMILY (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)
+
+    Map the field attribute in ZZFIELDNAME-ZZPRDTYPE (Product->BASIC_DATA3-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->BASIC_DATA3-ZZFIELDVALUE)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA-MATERIAL
+- id: IGM-001
+  name: Item Group - MLNX
+  source_field: ITEM_GROUP
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA-MATERIAL'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - MX_ITEMGROUP (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)
+
+    Map the field attribute in ZZFIELDNAME- ZZITEMGRP (Product->BASIC_DATA3-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->BASIC_DATA3-ZZFIELDVALUE)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA-MATERIAL
+- id: IOS-001
+  name: Item Operating System - MLNX
+  source_field: ITEM_OPERATING_SYSTEM
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA-MATERIAL'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - MX_ITEMOPERATINGSYSTEM (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA-MATERIAL
+- id: ITM-001
+  name: Item Technology - MLNX
+  source_field: TECHNOLOGY
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 4
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA-MATERIAL'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - MX_ITEM_TECHNOLOGY (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA-MATERIAL
+- id: ITM-002
+  name: Item Type - MLNX
+  source_field: ITEM_TYPE
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA-MATERIAL'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - MX_ITEMTYPE (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)
+
+    Map the field attribute in ZZFIELDNAME-ZZITEMTYP (Product->BASIC_DATA3-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->BASIC_DATA3-ZZFIELDVALUE)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA-MATERIAL
+- id: JAP-001
+  name: JAPAN SUPPORT
+  source_field: JAPAN_SUPPORT
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 70
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-JAPAN_SUPPORT (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: LAB-001
+  name: LABEL ENGINEERING SAMPLE
+  source_field: LABEL_ENGINEERING_SAMPLE
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-LABEL_ENGINEERING_SAMPLE (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: LAT-001
+  name: LATEST REVISION
+  source_field: LATEST_REVISION
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 70
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-LATEST_REVISION (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: LIC-001
+  name: LICENSE SYMBOL
+  source_field: LICENSE_SYMBOL
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-LICENSE_SYMBOL (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: LIC-002
+  name: LICENSE TYPE
+  source_field: MX_LICENSE_TYPE
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-MX_LICENSE_TYPE(Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: LBP-001
+  name: License Buffer Period
+  source_field: LICENSE_BUFFER_PERIOD
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 2
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA_SW_SERVICE'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - LICENSE_BUFFER (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA_SW_SERVICE
+- id: LR-001
+  name: License Rights
+  source_field: SUPPORT_TYPE
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 2
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA_SW_SERVICE'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - LICENSE_RIGHTS (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA_SW_SERVICE
+- id: LT-001
+  name: License Type
+  source_field: LICENSE_TYPE
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 2
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA_SW_SERVICE'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - LICENSE_TYPE (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA_SW_SERVICE
+- id: MAS-001
+  name: MASTER BOX DIM
+  source_field: MASTER_BOX_DIMENSIONS
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 70
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-MASTER_BOX_DIM (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: MAX-001
+  name: MAX SELL QTY
+  source_field: MAX_SELL_QTY
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-MAX_SELL_QTY (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: MEM-001
+  name: MEMORY
+  source_field: MEMORY
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: 'Map the field attribute in ZZFIELDNAME-MEMORY (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+
+    Map the field attribute in ZZFIELDNAME- ZZMEMORY (Product->BASIC_DATA3-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->BASIC_DATA3-ZZFIELDVALUE)'
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: MIN-001
+  name: MIN SELL QTY
+  source_field: MIN_SELL_QTY
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-MIN_SELL_QTY (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: MLN-001
+  name: MLNX Chip Name
+  source_field: CHIP_NAME
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA-MATERIAL'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - MX_CHIP_NAME (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)
+
+    Map the field attribute in ZZFIELDNAME-ZZCHIP (Product->BASIC_DATA3-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->BASIC_DATA3-ZZFIELDVALUE)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA-MATERIAL
+- id: MOD-001
+  name: MODE
+  source_field: MX_MODE
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-MX_MODE (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: MRP-001
+  name: MRP Controller
+  source_field: PLANNER
+  xpath: //Product/INTRFC_ADDL_DATA/ZZMRP_CONTROLLER/ZZMRP_CONTROLLER
+  type: CHAR
+  required: true
+  max_length: 3
+  severity: E
+  description: As-Is
+  target:
+    structure: MARC_SRC
+    field: MARC-DISPO
+- id: MXE-001
+  name: MX_EOL_DATE
+  source_field: EOL_DATE
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 10
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA-MATERIAL'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - MX_EOL_DATE (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)
+
+    Map the field attribute in ZZFIELDNAME- ZZEOLDATE (Product->BASIC_DATA3-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->BASIC_DATA3-ZZFIELDVALUE)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA-MATERIAL
+- id: MXI-001
+  name: MX_ITEM_ABC_LEADTIME_STR
+  source_field: MX_ITEM_ABC_LEADTIME
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA-MATERIAL'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - MX_ITEM_ABC_LEADTIME (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA-MATERIAL
+- id: MR-001
+  name: Major_Rev_num_of_chars
+  source_field: MAJOR_REV_NUM_OF_CHARS
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 70
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-MAJOR_REV_NUM_OF_CHARS (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: MPM-001
+  name: Mark Project Manager Owner
+  source_field: MARKETING_MANAGER_OWNER
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 40
+  severity: E
+  description: 'Map the field attribute in ZZFIELDNAME-MARK_PROJECT_MANAGER_OWNER (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+
+    Map the field attribute in ZZFIELDNAME-ZZMARKMAN (Product->BASIC_DATA3-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->BASIC_DATA3-ZZFIELDVALUE)'
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: M-001
+  name: Material
+  source_field: MATERIAL
+  xpath: //Product/ProductInternalID
+  type: CHAR
+  required: true
+  max_length: 18
+  severity: E
+  description: 'As-Is
+
+    Additionally map the field value to ReceiverProductInternalID (Product->ReceiverProductInternalID)'
+  target:
+    structure: MARA_SRC
+    field: MATNR
+- id: MBD-001
+  name: Material Basic Data Text
+  source_field: MATERIAL_BASIC_TEXT
+  xpath: //Product/TextCollection/Text/SAPScriptLine/SAPScriptLineText/SAPScriptLineText
+  type: CHAR
+  required: true
+  severity: E
+  description: "Default the below values when MATERIAL_BASIC_TEXT is not blank\n1.Default TextExistsIndicator as 'X'\n2.Default TypeCode as 'GRUN'\n3.Default LanguageCode as 'en'\n4. Default SAPScriptLineFormatCode as '*'\n5.Pass the OrdinalNumberValue as '1' and map the attribute value (first 72 characters) in SAPScriptLineText\n - Increment the OrdinalNumberValue by 1 and map the attribute value (next 72 characters) in SAPScriptLineText\n "
+  target:
+    structure: MARA_SRC
+    field: TDNAME
+- id: MD-001
+  name: Material Description
+  source_field: MATERIAL_DESCRIPTION
+  xpath: //Product/Description
+  type: CHAR
+  required: true
+  max_length: 40
+  severity: E
+  description: As-Is
+  target:
+    structure: MARA_SRC
+    field: MAKTX
+- id: MG-001
+  name: Material Group
+  source_field: MATERIAL_GROUP
+  xpath: //Product/ProductGroupInternalID
+  type: CHAR
+  required: true
+  max_length: 9
+  severity: E
+  description: As-Is
+  target:
+    structure: MARA_SRC
+    field: MATKL
+- id: MS-001
+  name: Material State
+  source_field: MATERIAL_STATE
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA-MATERIAL'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - STATE (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA-MATERIAL
+- id: MT-001
+  name: Material Type
+  source_field: MATERIAL_TYPE
+  xpath: //Product/ProductTypeCode
+  type: CHAR
+  required: true
+  max_length: 4
+  severity: E
+  description: As-Is
+  target:
+    structure: MARA_SRC
+    field: MTART
+- id: MOQ-001
+  name: Min Order Qty
+  source_field: MIN_ORDER_QTY
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-MIN_ORDER_QTY (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: MTM-001
+  name: Model Type - MLNX
+  source_field: MODEL_NUMBER
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA-MATERIAL'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - MX_MODEL_TYPE (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA-MATERIAL
+- id: NOP-001
+  name: NO PCB PER ARRAY
+  source_field: NO_PCB_PER_ARRAY
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-NO_PCB_PER_ARRAY (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: NUM-001
+  name: NUMBER OF ICS
+  source_field: NUMBER_OF_ICS
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-NUMBER_OF_ICS (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: NUM-002
+  name: NUMBER OF POWER SUPP
+  source_field: NUMBER_OF_POWER_SUPPLIES
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-NUMBER_OF_POWER_SUPPLIES (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: NVS-001
+  name: NV SW HW Bundle Indicator
+  source_field: BUNDLE_SKU
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 1
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA-MATERIAL'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - NV_SW_BUNDLE (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA-MATERIAL
+- id: NVU-001
+  name: NV US Corp Part Number
+  source_field: NV_US_CORP_PART_NUMBER
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-NV_US_CORP_PART_NUMBER (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: NVL-001
+  name: NVL DATA RATE
+  source_field: NVL_DATA_RATE
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-NVL_DATA_RATE (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: NVL-002
+  name: NVL NO OF PORTS
+  source_field: NVL_NO_OF_PORTS
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-NVL_NO_OF_PORTS (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: NCI-001
+  name: Needs Covered Items
+  source_field: NEEDS_COVERED_ITEMS
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-NEEDS_COVERED_ITEMS (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: NW-001
+  name: Net Weight
+  source_field: PRODUCT_NET_WEIGHT_G
+  xpath: //Product/QuantityCharacteristic/Product/QuantityCharacteristic/CharacteristicQuantity
+  type: QUAN
+  required: true
+  max_length: 13
+  severity: E
+  description: '1.Default Quantity as ''EA'' (Product->QuantityCharacteristic->Quantity) and unitCode as ''1.0''
+
+    2. Default CharacteristicQuantity as ''GRM'' (Product->QuantityCharacteristic->CharacteristicQuantity) and Map the attribute value in unitCode
+
+    3. Default CharacteristicQuantityTypeCode as ''NET_WEIGHT'' (Product->QuantityCharacteristic->CharacteristicQuantityTypeCode)'
+  target:
+    structure: MARA_SRC
+    field: NTGEW
+- id: ODC-001
+  name: Onsite Dispatch Coverage Type
+  source_field: ONSITE_DISPATCH_COVERAGE
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA_SW_SERVICE'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - ONSITE_DISPTACH_COVERAGE_TYPE (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA_SW_SERVICE
+- id: ODR-001
+  name: Onsite Dispatch Response Time
+  source_field: ONSITE_DISPATCH_RESPONSE
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA_SW_SERVICE'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - ONSITE_DISPTACH_RESPONSE_TIME (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA_SW_SERVICE
+- id: OOM-001
+  name: Operations Owner - MLNX
+  source_field: OPERATIONS_OWNER
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA-MATERIAL'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - MX_OPERATIONSOWNER (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)
+
+    Map the field attribute in ZZFIELDNAME- ZZOPERMAN(Product->BASIC_DATA3-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->BASIC_DATA3-ZZFIELDVALUE)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA-MATERIAL
+- id: OCO-001
+  name: Origin COO
+  source_field: ITEM_COO
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-ORIGIN_COO (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: PAC-001
+  name: PACKING METHOD
+  source_field: PACKING_METHOD
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-PACKING_METHOD (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: PAR-001
+  name: PARTNER ASSISTED
+  source_field: PARTNER_ASSISTED
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA_SW_SERVICE'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - PARTNER_ASSISTED (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA_SW_SERVICE
+- id: PHI-001
+  name: PHISICAL NO. OF PORT
+  source_field: PHYSICAL_NO_OF_PORTS
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 70
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-PHISICAL_NUMBER_OF_PORT (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: PHY-001
+  name: PHYSICAL_INTERFACE
+  source_field: PHYSICAL_INTERFACE
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-PHYSICAL_INTERFACE (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: PLM-001
+  name: PLM SOURCE
+  source_field: SOURCE_PLM_PDP
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 10
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA-MATERIAL'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - SOURCE_PLM (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA-MATERIAL
+- id: PRO-001
+  name: PRODUCTION MANAGER
+  source_field: PRODUCTION_MANAGER
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 254
+  severity: E
+  description: 'Map the field attribute in ZZFIELDNAME-PRODUCTION_MANAGER (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+
+    Map the field attribute in ZZFIELDNAME-ZZPRODMAN(Product->BASIC_DATA3-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->BASIC_DATA3-ZZFIELDVALUE)'
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: PC-001
+  name: Part Category
+  source_field: PART_CATEGORY
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA-MATERIAL'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - MX_PART_CATEGORY (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)
+
+    Map the field attribute in ZZFIELDNAME-ZZPARTCAT (Product->BASIC_DATA3-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->BASIC_DATA3-ZZFIELDVALUE)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA-MATERIAL
+- id: P-001
+  name: Plant
+  xpath: //Product/Plant/PlantID
+  type: CHAR
+  required: true
+  max_length: 4
+  severity: E
+  description: Default PlantID to 9200
+  target:
+    structure: MARC_SRC
+    field: MARC- WERKS
+- id: PT-001
+  name: Procurement Type
+  source_field: MAKE_BUY
+  xpath: //Product/Plant/SupplyPlanning/ProcurementTypeCode
+  type: CHAR
+  required: true
+  max_length: 1
+  severity: E
+  description: 'As-Is
+
+    Map the field attribute in ZZFIELDNAME-ZZPRCMETH (Product->BASIC_DATA3-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->BASIC_DATA3-ZZFIELDVALUE)'
+  target:
+    structure: MARC_SRC
+    field: MARC-BESKZ
+- id: PH-001
+  name: Product Hierarchy
+  source_field: PRODUCT_HIERARCHY
+  xpath: //Product/ProductHierarchyInternalID
+  type: CHAR
+  required: true
+  max_length: 18
+  severity: E
+  description: As-Is
+  target:
+    structure: MARA_SRC
+    field: PRDHA
+- id: PPM-001
+  name: Production Procurement Method
+  source_field: PRODUCTION_PROCUREMENT
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-PROD_PROCUREMENT (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: PPO-001
+  name: ProductionPlan Owner
+  source_field: PRODUCTION_PLANNING_OWNER
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 70
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-PRODUCTION_PLAN_OWNER (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: PG-001
+  name: Purchasing Group
+  source_field: PURCHASING_GROUP
+  xpath: //Product/INTRFC_ADDL_DATA/ZZPURCHASING_GROUP/ZZPURCHASING_GROUP
+  type: CHAR
+  required: true
+  max_length: 3
+  severity: E
+  description: As-Is
+  target:
+    structure: MARC_SRC
+    field: MARC-EKGRP
+- id: QTP-001
+  name: Quick Turn Procurement Method
+  source_field: QT_PROCUREMENT
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-QT_PROCUREMENT (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: REV-001
+  name: REVISION
+  xpath: "//ECO_DATA\_/ZZREVLV"
+  type: CHAR
+  required: true
+  max_length: 2
+  severity: E
+  description: "Require Emtpy tag if the revision does not come from Agile\nZZREVLV (Product->ECO_DATA\_)"
+- id: RSK-001
+  name: Replacement SKU
+  source_field: REPLACEMENT_OPN
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: 'Map the field attribute in ZZFIELDNAME-MX_REPLACEMENT_OPN (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+
+    Map the field attribute in ZZFIELDNAME- ZZREPLOPN (Product->BASIC_DATA3-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->BASIC_DATA3-ZZFIELDVALUE)'
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: RF-001
+  name: Royality Flag
+  source_field: ROYALTY
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 1
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA-MATERIAL'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - MX_ROYALTYFLAG (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA-MATERIAL
+- id: SCH-001
+  name: SCHEDULE B
+  source_field: SCHEDULE_B
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 70
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-SCHEDULE_B (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: SEC-001
+  name: SECURE BOOT
+  source_field: SECURE_BOOT
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-SECURE_BOOT (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: SER-001
+  name: SERIAL_GENERATION
+  source_field: SERIAL_GENERATION
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA-MATERIAL'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - SERIAL_GENERATION (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA-MATERIAL
+- id: SIN-001
+  name: SINGLE BOX DIM
+  source_field: SINGLE_BOX_DIMENSIONS
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 70
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-SINGLE_BOX_DIM (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: SUP-001
+  name: SUPERVISED
+  source_field: SUPERVISED
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA-MATERIAL'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - MX_SUPERVISED (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA-MATERIAL
+- id: SUP-002
+  name: SUPPORT_LEVEL-MLNX
+  source_field: SUPPORT_LEVEL_MLNX
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA_SW_SERVICE'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - SUPPORT_LEVEL-MLNX (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA_SW_SERVICE
+- id: SSF-001
+  name: Software and Service Family
+  source_field: SOFTWARE_SERVICE_FAMILY
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 4
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA_SW_SERVICE'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - SW_SERVICE_FAMILY (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA_SW_SERVICE
+- id: SL-001
+  name: Storage Location
+  xpath: //Product/Plant/StorageLocation/StorageLocationID
+  type: CHAR
+  required: true
+  max_length: 4
+  severity: E
+  description: Default '9200'
+  target:
+    structure: MARD_SRC
+    field: MARD - LGORT
+- id: SFM-001
+  name: Sub Family - MLNX
+  source_field: ITEM_SUB_FAMILY
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 2
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA-MATERIAL'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - MX_SUB-FAMILY (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)
+
+    Map the field attribute in ZZFIELDNAME-ZZSUBTYPE (Product->BASIC_DATA3-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->BASIC_DATA3-ZZFIELDVALUE)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA-MATERIAL
+- id: THI-001
+  name: THICKNESS
+  source_field: THICKNESS
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 70
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-THICKNESS (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: TOR-001
+  name: TOR DEPTH
+  source_field: TOR_DEPTH
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-TOR_DEPTH (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: TOR-002
+  name: TOR_FAN_DIRECTION
+  source_field: FAN_DIRECTION
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 70
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-TOR_FAN_DIRECTION (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: TBL-001
+  name: Token Based License Model
+  source_field: TOKEN_BASED_LICENSE_MODEL
+  xpath: //Product/Classification/Product/Classification/CharacteristicValuation/Characteristic & CharcValue
+  type: CHAR
+  required: true
+  max_length: 1
+  severity: E
+  description: '1.Default ClassType as ''001'' (Classification->ClassAssignment->ClassType)
+
+    2. Default Class as ''NVIDIA_SW_SERVICE'' (Classification->ClassAssignment->ClassType->Class Assignment->Class)
+
+    3. Map the field attribute in Characteristic - TOKEN_BASED_LIC_MODEL (Classification->Characteristic Valuation->Characteristic) and the field attribute values in CharcValue (Classification->Characteristic Valuation->CharcValue)'
+  target:
+    structure: MARA_AUSP_SRC
+    field: NVIDIA_SW_SERVICE
+- id: WAR-001
+  name: WARRANTY MONTH
+  source_field: WARRANTY_PERIOD
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 70
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-WARRANTY_MONTH (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
+- id: WAT-001
+  name: WATER COOLING
+  source_field: WATER_COOLING
+  xpath: //Product/Product/MX_CHAR
+  type: CHAR
+  required: true
+  max_length: 30
+  severity: E
+  description: Map the field attribute in ZZFIELDNAME-WATER_COOLING (Product->MX_CHAR-ZZFIELDNAME) and the field atribute values in ZZFIELDVALUE (Product->MX_CHAR-ZZFIELDVALUE)
+  target:
+    structure: ZMDGMMMXCHAR_SRC
+    field: ZMDG_MM_MAT_C_MX
