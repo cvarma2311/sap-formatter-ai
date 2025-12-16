@@ -2,7 +2,7 @@ import argparse
 import json
 from pathlib import Path
 
-from src.orchestration.rule_graph import compile_rules
+from src.orchestration.rule_graph import compile_rules_with_cache
 from src.rule_loader import load_rules
 from src.utils.logging import get_logger
 
@@ -51,6 +51,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--out", default="rules/compiled/compiled_rules.json", help="Path to compiled JSON output")
     parser.add_argument("--id", dest="rule_id", default=None, help="Optional rule id filter")
     parser.add_argument("--skip-ai", action="store_true", help="Skip AI-dependent steps (heuristics only)")
+    parser.add_argument("--cache-dir", default=".cache", help="Directory for caches (intent/transformation).")
+    parser.add_argument("--no-cache", action="store_true", help="Disable caching for debugging.")
     return parser.parse_args()
 
 
@@ -74,7 +76,15 @@ def main() -> None:
         parent = out_path.parent if out_path.suffix else out_path
         out_path = parent / f"{args.rule_id}-compile{suffix}"
 
-    catalog = compile_rules(rules, args.validation_description, input_hash)
+    cache_dir = None if args.no_cache else Path(args.cache_dir)
+
+    catalog = compile_rules_with_cache(
+        rules,
+        args.validation_description,
+        input_hash,
+        cache_dir=cache_dir,
+        use_cache=not args.no_cache,
+    )
     write_outputs(catalog, out_path)
     logger.info("Compilation complete. Field rules: %s, procedural rules: %s", len(catalog.field_rules), len(catalog.procedural_rules))
 

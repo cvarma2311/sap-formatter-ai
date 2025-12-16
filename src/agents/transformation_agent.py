@@ -30,9 +30,6 @@ def resolve_transformations(description: str) -> Tuple[List[TransformationType],
     Returns transformations and issues (needs_review reasons).
     """
     fragments = extract_transformation_fragments(description)
-    normalized = normalize_transformations(fragments)
-    issues = []
-    for frag, norm in zip(fragments, normalized):
-        if norm == TransformationType.NEEDS_REVIEW:
-            issues.append(f"Unrecognized transformation fragment: {frag}")
+    normalized, unknown = normalize_transformations(fragments)
+    issues = [f"Unrecognized transformation fragment: {frag}" for frag in unknown]
     return normalized, issues

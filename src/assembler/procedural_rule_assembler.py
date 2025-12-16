@@ -5,6 +5,7 @@ from src.data_models import (
     Condition,
     DefaultAssignment,
     ProceduralRule,
+    RowExpansionSpec,
     RuleType,
     SourceTargetSpec,
 )
@@ -17,6 +18,7 @@ def assemble_procedural_rule(
     targets: List[SourceTargetSpec],
     defaults: List[DefaultAssignment],
     chunking: Optional[ChunkingSpec],
+    row_expansion: Optional[RowExpansionSpec],
     steps: List[str],
 ) -> ProceduralRule:
     return ProceduralRule(
@@ -26,6 +28,6 @@ def assemble_procedural_rule(
         targets=targets,
         defaults=defaults,
         chunking=chunking,
+        row_expansion=row_expansion,
         steps=steps,
     )
-

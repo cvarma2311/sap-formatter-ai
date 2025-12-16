@@ -1,6 +1,9 @@
 from pathlib import Path
-from typing import List, Tuple
+from typing import List, Optional, Tuple
 
+from pydantic import ValidationError
+
+from src.agents.repair_agent import attempt_repair
 from src.agents.chunking_agent import normalize_chunking
 from src.agents.defaulting_agent import normalize_defaults
 from src.agents.identity_agent import resolve_identity
@@ -22,26 +25,30 @@ from src.utils.logging import get_logger
 logger = get_logger(__name__)
 
 
-def _intent_with_cache(rule: MappingRule, cache: LocalCache) -> Tuple[RuleIntent, dict]:
+def _intent_with_cache(rule: MappingRule, cache: Optional[LocalCache]) -> Tuple[RuleIntent, dict]:
     key = hash_text((rule.description or "") + (rule.xpath or "") + (rule.target.field or ""))
-    cached = cache.get(key)
-    if cached:
-        return RuleIntent(cached["intent"]), cached
+    if cache:
+        cached = cache.get(key)
+        if cached:
+            return RuleIntent(cached["intent"]), cached
     intent, meta = classify_intent(rule)
-    cache.set(key, {"intent": intent.value, **meta})
+    if cache:
+        cache.set(key, {"intent": intent.value, **meta})
     return intent, meta
 
 
-def _transformations_with_cache(description: str, cache: LocalCache):
+def _transformations_with_cache(description: str, cache: Optional[LocalCache]):
     key = hash_text(description)
-    cached = cache.get(key)
-    if cached:
-        return [t for t in cached.get("transformations", [])], cached.get("issues", [])
+    if cache:
+        cached = cache.get(key)
+        if cached:
+            return [t for t in cached.get("transformations", [])], cached.get("issues", [])
     transformations, issues = resolve_transformations(description)
-    cache.set(
-        key,
-        {"transformations": [t.value if hasattr(t, "value") else str(t) for t in transformations], "issues": issues},
-    )
+    if cache:
+        cache.set(
+            key,
+            {"transformations": [t.value if hasattr(t, "value") else str(t) for t in transformations], "issues": issues},
+        )
     return transformations, issues
 
 
@@ -50,8 +57,18 @@ def compile_rules(
     validation_description: str | None,
     input_hash: str | None,
 ) -> Catalog:
-    intent_cache = LocalCache(Path(".cache/intent_cache.json"))
-    transform_cache = LocalCache(Path(".cache/transform_cache.json"))
+    return compile_rules_with_cache(rules, validation_description, input_hash, cache_dir=Path(".cache"), use_cache=True)
+
+
+def compile_rules_with_cache(
+    rules: List[MappingRule],
+    validation_description: str | None,
+    input_hash: str | None,
+    cache_dir: Path | None,
+    use_cache: bool,
+) -> Catalog:
+    intent_cache = LocalCache(cache_dir / "intent_cache.json") if use_cache and cache_dir else None
+    transform_cache = LocalCache(cache_dir / "transform_cache.json") if use_cache and cache_dir else None
 
     field_rules = []
     procedural_rules = []
@@ -68,21 +85,37 @@ def compile_rules(
             logger.warning("Rule %s needs review: %s", rule.id, issue)
 
         if intent == RuleIntent.PROCEDURAL_MAPPING:
-            cond, defaults, chunking = build_procedural_ir(rule.description or "", source_field=rule.target.field or "")
+            rule_type, cond, defaults, chunking, row_expansion, steps = build_procedural_ir(
+                rule.description or "", source_field=rule.target.field or ""
+            )
             defaults = normalize_defaults(defaults)
             chunking = normalize_chunking(chunking)
             source_spec = SourceTargetSpec(table=table_name, field=field_name)
             targets = [SourceTargetSpec(table=rule.target.structure, field=rule.target.field)]
-            proc_rule = assemble_procedural_rule(
-                rule_type=RuleType.TEXT_DEFAULTS_AND_CHUNKING,
-                condition=cond,
-                source=source_spec,
-                targets=targets,
-                defaults=defaults,
-                chunking=chunking,
-                steps=[],
-            )
-            procedural_rules.append(proc_rule)
+            try:
+                proc_rule = assemble_procedural_rule(
+                    rule_type=rule_type,
+                    condition=cond,
+                    source=source_spec,
+                    targets=targets,
+                    defaults=defaults,
+                    chunking=chunking,
+                    row_expansion=row_expansion,
+                    steps=steps,
+                )
+                procedural_rules.append(proc_rule)
+            except ValidationError as exc:
+                repaired = attempt_repair(
+                    {
+                        "rule_type": rule_type.value if hasattr(rule_type, "value") else str(rule_type),
+                        "condition": cond.model_dump(),
+                        "defaults": [d.model_dump() for d in defaults],
+                        "row_expansion": row_expansion.model_dump() if row_expansion else None,
+                    },
+                    str(exc),
+                )
+                logger.error("Procedural rule validation failed for %s: %s", rule.id, exc)
+                logger.error("Repaired fragment (NEEDS_REVIEW): %s", repaired)
             continue
 
         primary_target, additional_targets = build_multitarget_specs(
@@ -92,34 +125,62 @@ def compile_rules(
         )
 
         # Primary mapping
-        field_rules.append(
-            assemble_field_rule(
-                table_name=table_name,
-                field_name=field_name,
-                target_table=primary_target.table or "",
-                target_field=primary_target.field or "",
-                data_type=data_type,
-                validation_function=validation_fn,
-                constraints=constraints,
-                transformations=transformations,
-                relation_keys=relation_key or make_relation_key(primary_target.table, primary_target.field),
-            )
-        )
-
-        # Additional targets (multi-target map)
-        for tgt in additional_targets:
+        try:
             field_rules.append(
                 assemble_field_rule(
                     table_name=table_name,
                     field_name=field_name,
-                    target_table=tgt.table or "",
-                    target_field=tgt.field or "",
+                    target_table=primary_target.table or "",
+                    target_field=primary_target.field or "",
                     data_type=data_type,
                     validation_function=validation_fn,
                     constraints=constraints,
                     transformations=transformations,
-                    relation_keys=make_relation_key(tgt.table, tgt.field),
+                    relation_keys=relation_key or make_relation_key(primary_target.table, primary_target.field),
                 )
             )
+        except ValidationError as exc:
+            repaired = attempt_repair(
+                {
+                    "table_name": table_name,
+                    "field_name": field_name,
+                    "target_table": primary_target.table,
+                    "target_field": primary_target.field,
+                    "data_type": data_type.value if hasattr(data_type, "value") else str(data_type),
+                },
+                str(exc),
+            )
+            logger.error("Field rule validation failed for %s: %s", rule.id, exc)
+            logger.error("Repaired fragment (NEEDS_REVIEW): %s", repaired)
+
+        # Additional targets (multi-target map)
+        for tgt in additional_targets:
+            try:
+                field_rules.append(
+                    assemble_field_rule(
+                        table_name=table_name,
+                        field_name=field_name,
+                        target_table=tgt.table or "",
+                        target_field=tgt.field or "",
+                        data_type=data_type,
+                        validation_function=validation_fn,
+                        constraints=constraints,
+                        transformations=transformations,
+                        relation_keys=make_relation_key(tgt.table, tgt.field),
+                    )
+                )
+            except ValidationError as exc:
+                repaired = attempt_repair(
+                    {
+                        "table_name": table_name,
+                        "field_name": field_name,
+                        "target_table": tgt.table,
+                        "target_field": tgt.field,
+                        "data_type": data_type.value if hasattr(data_type, "value") else str(data_type),
+                    },
+                    str(exc),
+                )
+                logger.error("Field rule validation failed for %s (additional target): %s", rule.id, exc)
+                logger.error("Repaired fragment (NEEDS_REVIEW): %s", repaired)
 
     return assemble_catalog(field_rules, procedural_rules, validation_description, input_hash)

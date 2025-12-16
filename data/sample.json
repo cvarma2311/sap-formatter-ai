@@ -1,0 +1,99 @@
+ {
+    "data": [
+        {
+            "validation_description": "Agile_to_MDG_Validation",
+            "field_rules": [
+                {
+                    "unique_id": "Product.ProductInternalID",
+                    "table_name": "Product",
+                    "field_name": "ProductInternalID",
+                    "relation_keys": "MARA_SRC.MATNR",
+                    "data_type": "string",
+                    "config": {
+                        "key_config": {
+                            "validation_function": "equal",
+                            "source": {
+                                "table": "Product",
+                                "field": "ProductInternalID",
+                                "transformations": ["not_null", "pad_left:4"]
+                            },
+                            "target": {
+                                "table": "MARA_SRC",
+                                "field": "MATNR",
+                                "transformations": ["not_null"]
+                            }
+                        }
+                    }
+                },
+                {
+                    "unique_id": "Product.ProductTypeCode",
+                    "table_name": "Product",
+                    "field_name": "ProductTypeCode",
+                    "relation_keys": "MARA_SRC.MTART",
+                    "data_type": "string",
+                    "config": {
+                        "key_config": {
+                            "validation_function": "equal",
+                            "source": {
+                                "table": "Product",
+                                "field": "ProductTypeCode",
+                                "transformations": [
+                                    "upper"
+                                ]
+                            },
+                            "target": {
+                                "table": "MARA_SRC",
+                                "field": "MTART",
+                                "transformations": ["upper"]
+                            }
+                        }
+                    }
+                },
+                {
+                    "unique_id": "Product.ProductGroupInternalID",
+                    "table_name": "Product",
+                    "field_name": "ProductGroupInternalID",
+                    "relation_keys": "MARA_SRC.MATKL",
+                    "data_type": "string",
+                    "config": {
+                        "key_config": {
+                            "validation_function": "equal",
+                            "source": {
+                                "table": "Product",
+                                "field": "ProductGroupInternalID",
+                                "transformations": ["trim", "upper"]
+                            },
+                            "target": {
+                                "table": "MARA_SRC",
+                                "field": "MATKL",
+                                "transformations": ["upper"]
+                            }
+                        }
+                    }
+                },
+                {
+                    "unique_id": "Product.Description",
+                    "table_name": "Product",
+                    "field_name": "Description",
+                    "relation_keys": "MARA_SRC.MAKTX",
+                    "data_type": "string",
+                    "config": {
+                        "key_config": {
+                            "validation_function": "equal",
+                            "source": {
+                                "table": "Product",
+                                "field": "Description",
+                                "transformations": ["trim", "substring:0:10"]
+                            },
+                            "target": {
+                                "table": "MARA_SRC",
+                                "field": "MAKTX",
+                                "transformations": ["trim", "substring:0:10"]
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

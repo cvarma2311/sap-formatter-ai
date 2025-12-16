@@ -44,6 +44,10 @@ class RuleType(str, Enum):
     TEXT_CHUNKING = "TEXT_CHUNKING"
     MULTI_TARGET_MAP = "MULTI_TARGET_MAP"
     TEXT_DEFAULTS_AND_CHUNKING = "TEXT_DEFAULTS_AND_CHUNKING"
+    DEFAULTING_ONLY = "DEFAULTING_ONLY"
+    CONDITIONAL_DEFAULTS = "CONDITIONAL_DEFAULTS"
+    ROW_EXPANSION = "ROW_EXPANSION"
+    GENERIC_PROCEDURAL = "GENERIC_PROCEDURAL"
 
 
 class ConditionType(str, Enum):
@@ -89,6 +93,10 @@ class ConstraintSpec(BaseModel):
     required: Optional[bool] = None
     max_length: Optional[int] = None
     severity: Optional[SeverityLevel] = None
+    allowed_values: Optional[List[str]] = None
+    pattern: Optional[str] = None
+    range_min: Optional[float] = None
+    range_max: Optional[float] = None
 
 
 class KeyConfig(BaseModel):
@@ -128,6 +136,11 @@ class ChunkingSpec(BaseModel):
     map_to: Optional[str] = None
 
 
+class RowExpansionSpec(BaseModel):
+    delimiter: Optional[str] = None
+    map_to: Optional[str] = None
+
+
 class ProceduralRule(BaseModel):
     rule_type: RuleType
     condition: Condition = Condition()
@@ -135,6 +148,7 @@ class ProceduralRule(BaseModel):
     targets: List[SourceTargetSpec] = Field(default_factory=list)
     defaults: List[DefaultAssignment] = Field(default_factory=list)
     chunking: Optional[ChunkingSpec] = None
+    row_expansion: Optional[RowExpansionSpec] = None
     steps: List[str] = Field(default_factory=list)
 
 
@@ -173,4 +187,5 @@ __all__ = [
     "TargetRef",
     "TransformationType",
     "ValidationFunction",
+    "RowExpansionSpec",
 ]
