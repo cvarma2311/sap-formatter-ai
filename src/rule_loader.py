@@ -1,29 +1,43 @@
+from pathlib import Path
+from typing import List, Optional, Tuple
+
 import yaml
-from typing import List
-from data_models import MappingRule
+from pydantic import ValidationError
 
-class RuleLoader:
-    """Loads mapping rules from a YAML or Excel file."""
+from src.data_models import MappingRule
+from src.utils.hashing import hash_dict
+from src.utils.logging import get_logger
 
-    def load_from_yaml(self, file_path: str) -> List[MappingRule]:
-        """
-        Loads and parses rules from a YAML file that is expected to be a dictionary
-        with a top-level 'rules' key containing the list of rule objects.
-        """
-        print(f"Loading rules from {file_path}...")
-        with open(file_path, 'r') as f:
-            data = yaml.safe_load(f)
-        
-        # Check if the loaded data is a dictionary and has the 'rules' key
-        if not isinstance(data, dict) or 'rules' not in data:
-            raise ValueError("YAML file should be a dictionary with a top-level 'rules' key.")
+logger = get_logger(__name__)
 
-        raw_rules = data['rules']
-        
-        # Ensure the 'rules' key contains a list
-        if not isinstance(raw_rules, list):
-            raise ValueError("The 'rules' key in the YAML file should contain a list of rule objects.")
 
-        rules = [MappingRule(**rule_data) for rule_data in raw_rules]
-        print(f"Successfully loaded {len(rules)} rules.")
-        return rules
+def _load_raw_rules(path: Path) -> List[dict]:
+    with path.open() as f:
+        data = yaml.safe_load(f) or {}
+    if isinstance(data, dict) and "rules" in data:
+        return data.get("rules") or []
+    if isinstance(data, list):
+        return data
+    raise ValueError("YAML structure must be a list or contain a top-level 'rules' key.")
+
+
+def load_rules(path: Path, rule_id: Optional[str] = None) -> Tuple[List[MappingRule], str]:
+    """
+    Load YAML rules into MappingRule models.
+    Returns tuple of rules list and deterministic input hash.
+    """
+    raw_rules = _load_raw_rules(path)
+    if rule_id:
+        raw_rules = [r for r in raw_rules if str(r.get("id")) == str(rule_id)]
+        if not raw_rules:
+            logger.warning("No rules found matching id=%s", rule_id)
+    parsed: List[MappingRule] = []
+    for entry in raw_rules:
+        try:
+            parsed.append(MappingRule.model_validate(entry))
+        except ValidationError as exc:
+            logger.error("Invalid mapping rule %s: %s", entry.get("id"), exc)
+            continue
+    input_hash = hash_dict(raw_rules)
+    return parsed, input_hash
+

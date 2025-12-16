@@ -1,0 +1,697 @@
+{
+  "0178a2aa3a1ce0425cad86e0b5e85153810fc4df956e272ea45870c5da1cfced": {
+    "hash": "3fb6d400823a04b9c3faaeb2ae894aedc5d9527272ae9ba4e014d229f16fe112",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "01a035316e6216f55274dbd7e679e2f01ab512ad695e0edfad055c5a0df88b5b": {
+    "hash": "55676b671b2c1b5e42d7db5129b85b6f76688fef1c27e298f3b6cc703ce9f768",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "01fb69a36e07e22242b9da1402e3a03d7e6cdad764f5a79d44d4ef38f46fd1e5": {
+    "hash": "888dee66b193939900072d2ff54c9da2133b5568657c86f73a025ea507f56f04",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "020741d63e7154bc5fef7574e0657c577cdd8205410e68b69e90a843db8af6da": {
+    "hash": "b2968c91f744542f59aea09666a785842a5841c3ed17bd7c724c224b06a4d9b4",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "03d88380937f0640aeaceb411f10efffad5dbae73c2b0b62c61eec333dc74044": {
+    "hash": "e400afdc5e545bd78fef612d5d77a61fc8f65563d3e7be63dbea992bb9b188ee",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "04778083c40838785b921a09fcab43c2f0ff5a06a2f646e7b00d05b0e8867ef0": {
+    "hash": "53af2e4efb1aac5070d880275b5d4aada55238f5939bf031813708dde9c9adec",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "0513362c059c77d92b8448a11d9f509b93f751cb48e9aa4cc10df6225deafce3": {
+    "hash": "a647cd607566b0007af7b806d485ff2f58140030505f61d666072886085b3a48",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "058c825fa41f2e39c119b510838396455868bf42ae7fea34666572ce512c368c": {
+    "hash": "508b005d888c12516d0ec677cb0a39d1b14bb76a9ad39b7faed5e944ae935644",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "082b83e87f5f0feaf363b89e1062f75d35bdba7d899cd6d6926f070e08c4da17": {
+    "hash": "53cdeb25e0c5689615abf7f0446c1d6fe3fd08df5a69b7fa9afeb32460235abe",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "0d4f8253f6a5fa5f41deba360f7544b7742ee8c8e74396bd08b3f522a9ae5ad3": {
+    "hash": "5a4cb4b57af070a2681e9e5b85f51cf0495cc9bacaa8e8b04848a97e751311e2",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "0f0f2a27a3673b153ab7385c9c8ddf136f91902e5f5c702771ef73074e715e97": {
+    "hash": "05bd1cb921e40869d7002da141e4b17459be7b1916f1cf6e9afbf89eebc955cc",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "0f4fb1fcf9d4751de7f0c5eeb620684b8d8884d9d44fd0c9793e063a7d72a497": {
+    "hash": "1c2a934db990c7d4bf1e1f4d87d31bc74583bebbb1e111c2fd848adbcfa26a04",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "13b2ed68c2833f75e36ec5c79561d2be8b87fa883fc376b7b60b19cc051dbe4e": {
+    "hash": "f3d0f51d9f6c7e117c3ace1dc1756a4f882a4f1d654b44b8b72fe8b72a85c40d",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "19f3f234ccade825fa9d05a57fe1c7ab8c59eac73beb654f9677863edfe18447": {
+    "hash": "b0c542d2eff5226787758f8d6c3f53ac6df80e932c747f58e2ca16f79623d1ad",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "1c623a885c7a8cc297561b1d0b885b600b294bb7a9c04ac6c3e686c202b5b1d1": {
+    "hash": "c1c4522678241a0edf359d03f51dd7a0f6cc779d1b409a22c1e94d978bb75ebd",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "2078d932445cefa9ab7679e079dc9c112be3be45834eea289c1927c932a0fd59": {
+    "hash": "72c92d4c3eb95d54eb65179a4de12483e47072750447973de440960df56d15e8",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "208140f0106e0b81c58f1762eb197553fb26da658957240a518a20f712aea193": {
+    "hash": "e62ceeaf0dee939425c5dbddfbf004c085128928367e5a43d7db2cfe96fb4d9f",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "260f7f38e39ff78e928eef35b771573e3c63bfb493805d7b81c7b3788f6fc251": {
+    "hash": "8f20b84e88bbedfb0d41a000436968a6b8f77076a6ea78798c6b4cd16e38b25c",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "269316d6ad8c1b3ec9f72bdbc35c30f76b60834cc6be72afb2e168a97c40b4b8": {
+    "hash": "68a401949b901ee559969c9c6812947ba561a8f83086dcfcaa91760682e18bf8",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "272ff6b15db76a3379df12f5ec66f8d2c609cd1a6379950f8a294ba79d0f3104": {
+    "hash": "91db0fd9935803f7c09f9a07d09635e9d11c0bf03b4f5ed68e8fabfd5933fe18",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "27a539e80367c31bc1aa56c4a37be6f621fab0bfa5c64f05cd7153e8a002e358": {
+    "hash": "d0fb10c66353e2af719a36b17a19cc2c2e3ebe734f4fa28cd10cdaa8fddf86cc",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "28ffb60a3a2b8cee6556a6230c4fc4b684762b4551e194148c657dd4d333c37f": {
+    "hash": "ae51e290840af1904bacf9a3238c49cc6bcc038f8b19fb4578dceb7f1a236beb",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "2b2e84dbca3bc9c32858c2f637fc81d7d639e38c7599653aef83ce459f36479a": {
+    "hash": "5ac97c15360fdd2d882e798ca1922e593f4028de04b629a1cd374047fd1ddb1f",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "2f202bfd64ed0e1f491b6c0caa1fec31aad5f1a8f33344fdf05db15628b7e34b": {
+    "hash": "0d626ecd6d0514305202660a7f5a048409a1b3badf1614633e52b6a32ea48687",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "2f956dd478d48966015bad32fcf43494cd6b527e4270dcc0b090d868fdf3e65e": {
+    "hash": "29b54687c8a96fbb3ad563cf391f7ae7e2d37ef32f6c270b5dc6d373c03ba3b7",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "3095cb62e6898091aab1c4a0d6011fbb36ebac04b5400eb08a1f4da304190164": {
+    "hash": "cc84fd0a4a7a1dbe178912cf96f53cd0c1087496be9f084fe06357e7c7da48a8",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "30c8e67d15366a3f949b29fe5b62bf924ffd98acd1ca3c7810bd3616c236b190": {
+    "hash": "1afabc5fa99673f8576afcd4eaa5ff21d9280451d2a1020cb8470b13ac7c6046",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "340f0024e1bb217047ffbfc0a6b39698b23ffba036bbeacb21ef5d9b1533abd8": {
+    "hash": "a526367b27e393cef1ae445ed819954b7cc2c01379436eaa17f0019600bbef91",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "34bc46bd1f1ea378eae0e16f27431e9e36e88dae168fecd100fcb8bc7b98e7a1": {
+    "hash": "d494e826d56a401a3e289d1948fa2cf0523a13c00b611f477dc1f79c82d4c600",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "364bb470daa3d4e88d509d5c64b718665888adf641b56bade0f4db4655142f60": {
+    "hash": "0b6384e34239b88f5fe7db1fd7fda642d36f090c6d75b6f8dfc18edbdc9f42c5",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "387801689a6bd21d2a4c9bab5f27b76381b1df96aac06eec9048449864a8620c": {
+    "hash": "578cf6d940a2953b7d5ed53f712fb9e31a2d5c60149652f301f95053749be3bd",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "39cb86775ceb99c80e1aed33613ae46874ea16ae035852aab4f5feaaaafaeb04": {
+    "hash": "4d4aca774d17260a44f91f0050a745fb14a5b315d46065f2a02a8c2964da1f64",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "3a15da64bb7492c9aea4f2299d952176ea75603c08a130f1be905d7d45f5025d": {
+    "hash": "0cc7684884a5d41337f7cb39222cbff10d4a1cebcb1daafb0e47b0eb1b4ca4b7",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "3a1be5ba63daf9ea66f4fe1178e3b4a0828c19321f184ac521927e5e3dfda684": {
+    "hash": "69e40fd2886f3cd8a098720a41af02c674dbdbae397fe85124c018141e7d4a3c",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "3b7798a73292e49e9fa9190bdacad271b968211e5c8f320f6b331e0e11c91f7c": {
+    "hash": "31d5ed7f1f503d78358e97572e2d1fe074098a16861c1f9b90c487def284e4e1",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "3bc55eb77b5e814049ccf1e6328a60fa8ae050e8d3a36bab89847fd6773a0b2f": {
+    "hash": "bdfebf52442b5066100b237e0762431a7f480cb3755c958fdc0c2eee4c7a6f2d",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "3c6763f47db029314c64f68e73f99d8d12f915876887af9aef789419534b8ede": {
+    "hash": "a76ea49ef0472e28b7c36b98db70f302e061d6171c47e919ff01b41e468c9f97",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "3c8ee0ab67af72623cf5a4b2dd0a4493676fd933a920597d97815d5f6b3ba9a9": {
+    "hash": "d9425c2478b69ec339e3af455356eafc2aa8d3204ffc82f3a40b5b58ee6f290a",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "3d2e53f55acedb2557e5b53b2a9879feb1561e202b21a4d5890470e99091ad6a": {
+    "hash": "b499a36ed41ccbe73e17d2eaacd04bfd15e22ef6050d68e8d5967ca0309677c5",
+    "intent": "MULTI_TARGET_MAP",
+    "rationale": "Detected 'additionally map' phrase."
+  },
+  "3eadd2b2a105460b3b2aa522a8ca512c59a65720587b79278c07c953fbee8d13": {
+    "hash": "d9357489e0e6ff6785f835b3dbc365896d625c3e90e6663479ef330d49d8156d",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "3fd7f4be0357dd5f60750abeb5dfb22d6a207c9221e6441dc10e0e424817f6e3": {
+    "hash": "309d3a98e06da8690b02792c8627ef2517b3d5023ba5c1c7eaa429b2b7910093",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "3fe2447287f16e7f8d7d1d056478ebbef4faccb489837bf71ce44b01ef4c4959": {
+    "hash": "0293c62ffc28cc291ac7707a75549373c90e7277e8acce5a03c754d8979dc023",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "3ff2d126d9171d9cb2cc3c1974dbbfcb86dc5917bb23d2f3fb1fe360c977dc18": {
+    "hash": "90c71f1e82ec20519a518dc468288f78752cf0fadd9c7c7901b117f2bfc0e597",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "420cd430baa46f60ce8d3c02c1eb85a4ccd234eb3358fe17ce16debd06308cf5": {
+    "hash": "d81eab3b121b77a37cc7df0c7cb628e7ff443cd92016c41b9de72e89b2db7ce9",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "4737dc54394fddef146835281a47fc5c21869dda1af417affac5786aef24e801": {
+    "hash": "e18681aee55460c4ba841262eb15754556527aac1c95d571a1fe9756dc8b3b04",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "4a7711471f2505296c5d062655ae4bb6dcc4e572965ab04f88e80efa7867053d": {
+    "hash": "65dec71cd580ec3e208ffe1983db155ee2fc7bd80550fccb812a55d89a43e027",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "4c916f15cd7b32731937112f6f0c3192f29915c4999df9abaf7c512505bc32cd": {
+    "hash": "365d264d0865f8481a351e10a717da4115787056be37d95e52972f2c2ff1aaff",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "4e32543d487ada2a9e74a533d3d58154de7a9b73a464bec73a109107744b14ab": {
+    "hash": "b4148b5b227fdb1c4a392cdb9d9a9debb223f7521cd462dd0091fdb13a12d00f",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "503d58fa058f4c512dd69d6356ec58a91c127357d53507fa33c847bb22ea0d76": {
+    "hash": "32e68f2b7aa5f1dcf320acbf32af8950d344e54e71bd047a6fa8ac92c08ca1cb",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "51ab5d844fa0236c0c17c8249a079e5ced39ecee1faed64f3797d2f01088dcf9": {
+    "hash": "bbdb795b329e1789e473f3b7678a51d2f626a6fe56543e1f9b49c1a867fc81fa",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "55eac48b9bee35a556982717290463f540c74be49aadfb0ef60c52c2977d900c": {
+    "hash": "128a97448e5acad9c032f0a7111637c68721958877bd082e92bd8c3ed8e330c6",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "5833f3229179ce4613270be86865ab63d4f1667704a953e93ecf22a598c1e8e2": {
+    "hash": "8583dee24dd05d4f7281de5453bc12e6a8496b695ed2c812f849304ceb34ffcf",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "5b91577483a6a4abb7b9bdf7f43092f962b4a5e54b813edc3bace5aab9a9cf89": {
+    "hash": "27a2d5616c0d3ef124d05ea5da01d1c63f9a8ce156a949426bf963bc58382a2c",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "5c1e17235b3b2a3fca20dbde43fc9bd22d32302b616508241284437f3c713625": {
+    "hash": "6c073379d04e36b2287debeea5a3afacddf87139fdf941c740349f8d589aa760",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "5c3a564b4c2d2e9035b6320da4f31ef14711479df5bd113876a516137a83a99d": {
+    "hash": "fa7d7812fab4a3af96901b75b1e8e740656e8e0974a50bcf173fcff0eb655dc3",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "5ce9bf0894d965f6e3467d69719cab3eb2366f8ee91661be06c907cfc627ee45": {
+    "hash": "38a12da576025e78ff88fad2b8b693f78597c15b0560de8349a54a4d08647a3c",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "5db8380b7acf1dcb1c46501316598349b0eeb8f85cea360d6fdd6d34c4267746": {
+    "hash": "ef8e199edafe8d7697ae9f8359e294492db1ecd781358f32791189264663f98f",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "5e50f801fd57fc18ca47b278af150b5aa87ca7370d77ff6ec3a9583b3899bda0": {
+    "hash": "3d44c0408f9ffc00eb82938693843859210cde9e2018bd01669997934f526254",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "5fe4aff389ea27e6541e204ab1691e6807d0781fad8fd581a5bbf6962bc3b8f3": {
+    "hash": "71a37b2136a297e79b2201626d7b75072997e6517ed7d35fec6135a2bf96b472",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "6127062a5669fe50ee3b2d0257ac2a7f30d66a62a119ed32377afdaf54158871": {
+    "hash": "6fd17abe7850ea26a42107b9cda710ffc9a7407d8a98be4b373232957c787cf7",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "62715d62afad3efa7352c65257326c586806011bd56408da3abc4a175ddbff8a": {
+    "hash": "712acd5728d36fb655dfee26123e3e1f320beb3ce814e91eb6b94aa695d6cb03",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "64155124c3fe79a912264292ff8899cd116471bbcd766487cba532ee97a385f9": {
+    "hash": "3e50648dec28d5cb6733d557b6f2af2a2a9d217fbfa333025a4a8bdcf31e6346",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "662d0af53ad82aeafcc1170a082a1e84fdb70bf507cf69e5c018a7482eca9b48": {
+    "hash": "485cdf7377f28d6642883c32e5bbf5d0dd1333a7eff9b2dc8fa2d353fbbcf96e",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "66ce584230412a5b76263ba7cf257f37d3ff9aed4a6d5aa611170a625151d51e": {
+    "hash": "3ca1421d45f20b986077ccbe03e94f8f24616246ce310fb05d648003075c4b45",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "6ec4ab83cb43efbd8307b2227864f87affa8a3386661b6733866d6abe8f379e7": {
+    "hash": "061b5440b443c967053bb0c3b2e2a7d6038da3fa3d78f79d0a5932b84df57dbd",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "70504cac33b821b73630aef1132548e8c27a595a066fbbd02e2dfc4e92a2b0ca": {
+    "hash": "de00ca3204f6d435a5a4213cd5e866a3f127c2f4cc87184f4f414f3e5afa1ff0",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "70c7b6eeb5c4cac0f27e296227ef51800d695564543ec568dae25521a8509641": {
+    "hash": "cae9708a3c7aac76f50be2510e2b54f0117606ccd4e1ab0cd284cd2f000b0670",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "7581999910163932860cbc629894d1d51ac6c81c182676501ad7ae2463c65165": {
+    "hash": "d2e9f5c07cde0643ce0a426433885d38c5161f4553fd73821fa97dc95665f2b8",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "7732faaa7370300a5a0c210705194df8b9f016329d41a2a871da86b7a81a68b2": {
+    "hash": "51bc5ae4e9c4a927120c05b3f9fb6aec62f91e564064e78dc1fc96aa57d07690",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "77ccf9b697a056e04e384ee0975675e3809c10f40960ea73e0b1fd94c54e6f96": {
+    "hash": "f9a6f42b153250c409e3f739f4118d4913db8896ed1322ab22504863ab42508f",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "787699a2695f1b71c95ff54ad92e2277c1f905a22edc7579babd81687e8f4d12": {
+    "hash": "d6a2871b67cc30c94601008db3c98c3c01739dd529e45e5fd2059dd1bcbca4a9",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "79dae69e9825ed5d69071ebf864b874d50eee83c1f79359e551baa9629ffca2a": {
+    "hash": "3daedd61621d4e4226c9d6238d44dd24d3886d5b38bdfbedd5c276c82b4a33d2",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "7e94cc2d05db61128be50a58f5e4e4dbc64cf54f945ef60e9ed0dc38b9de846d": {
+    "hash": "258addd22c980ddc83077a531bf4ca083b916294f926956aaef4f983bdf3b74e",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "8110770fdbe5f311f254c14977aa331b88fb4915a617fe36f67e47afdc473aa7": {
+    "hash": "84f0fc8dfa654f4d6bca58ff5ceff5f88acb2c1e3c80fb24d0098d9af2b4f66b",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "82702f8cf341c84c3832020852288d6ecd565e7a537852d3324068183e7eac5e": {
+    "hash": "7f816d215d3d9cf5ca9c7b24707a4b66857f5c871fed8993a141e9317132c86a",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "82b2efbd071d5056a1249f572547e654945a602b7c53245441d532ac863ea4e9": {
+    "hash": "1345a48a58c400ec24b1366ecc05e06ac1845e8bc243a04636c78b595c621daf",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "83eff0dd482ff3b87ba5f21195ae9dbf26abd8b8abdfd717047fcc46c468d4fe": {
+    "hash": "4bdfd79abef396694f15720ce829ea711751491f06b3357eb463a10bd88cb44d",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "859dcd166186b17c7067c93d6917ea09b5228a608421c816b299b06d45aef2ef": {
+    "hash": "25334e681fc03c28a066cd5e18eb5285183a9124e8e1091902890e054ddc50b4",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "88c122786e470cbdbc365acba1671b43cfb26237ebe68ad9aee2c73742c5caa8": {
+    "hash": "38a146ac7881269c7daf3d0cf6a03b4248fc4cafc2651c2e4b00f107823e8bdc",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "9029fb9242d60e0c4a08a8ff7dda7296941b285cbbaecc72e81e39af72302aa7": {
+    "hash": "5b2a4a926c97a0bc0b910dbf1c6542a9991521aab959004cbfe6fd5ecf621adb",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "9039dc0d845ade646ecb789f7bbc344dd80cbfe7fdccbce7b5e2990d62a2ddc2": {
+    "hash": "ee85a2f185df98eac28b1d9e045c8f1bf4c85e5cc98e8d913c237c7aa604da9f",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "94c825d52917cb198e2c5e291e8d5c0860fbd7e909f891d0a9241594d4b0cbc2": {
+    "hash": "c9bbc580cb5fd82404d2bf3f091c9b436c1e391e28f216744cdd507a418530ca",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "96ce8f28ea48091eea6772745260d0185386fba870f48abdca897303bf625c23": {
+    "hash": "c5b2dcbf0ee32deeb84e7c53c47688bb4ca43352826a18af06777c2f8dc2e1a3",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "973ea3527f355e024f826f2c288d9e4005f29c53178fcd6f068d546feec0ea08": {
+    "hash": "824ba0d428b91117d55ba1823e8f0bf1115ee55f9239e48f1a872e67051da368",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "977ab2bbf86fd144e286e1febfce8e38a76dee058530c0ba3700e92d9807e78a": {
+    "hash": "97208e5386e359420c19d673c484ec45cf68b4b1b935762657d7971af2d1e64a",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "99ff1f8489973aac2b0a430c84c4d8398f793c91b5199542f09ef6b40534ab60": {
+    "hash": "43ba12f000f63a3e509df4e108c751e3b14756fc6bfacdcae4165265c16cb4e7",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "9ac68f9b82a813db049ff00edcf173eb9bca4fdb3d9a482a64f045e8d98b8427": {
+    "hash": "ddddb693a2c307b2e4d93240b8d856c9b86e58c13cfea3ca1c49ec69bcd7181c",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "9c46eca058867543d1ee729466d3ff2b96102c6a1e644398c0d9f3956178f85e": {
+    "hash": "219087a2f2d20ecc1af3249102225370563f471e7fb4746ee2cd7076d43b5d95",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "9d753cd9f0e4a563a6f3fa01367d532b6dab2c521915aa95fba9a8ed35e31326": {
+    "hash": "096c15daf86c6e497491515928d94230e90f800ce37d5062a55b9c78e805a3a4",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "a81fea9006ac72d6bf0ec38ee5e7a6ef6a636a1e51e3494f640fc45ee7a05a95": {
+    "hash": "6698253e5bb78e63c9f7c8538a8ce81de512f69526b4d8213d60e66b1245c1cb",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "a9a48806edd103ed675ca7cc6b52cf0a8e9d8c194e19d7988f812e96a4004a84": {
+    "hash": "8cc2842c76c9f909f12993e6a8381a5f1d07da824786e8fdf102bdc4dcb64608",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "a9ecb8c02adb136456bf4311c18dcbc15dfa6f5829660e3d07c302e92818213d": {
+    "hash": "b65e9fd643d5e6a95705e97b4b0d9e332a368443bf63ce86cd876304a6fa30e7",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "aaf29dacff4e66adebffb2d50cf667b00d29090f25e32455b4a29cd18b0a3dc5": {
+    "hash": "52e8c5dcdc719ffc7e6bd7e1f24cce9f24867197e317632bc6ae639325773b17",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "abb85e9033b3e13a68b4715cf9d8f7b9ebaf17d6e44962fa3eda88c4d8a28032": {
+    "hash": "d1d0c698435ce7b7b7bad39511f805f17ee57d79ac0ede9bd0feaf855becf667",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "ac7f4421eaef1b115597e7f48469dc9eb695f846d2cd8baae8a0bc333c78232a": {
+    "hash": "ead1bd9ca59c2179665e89d468ddd0210b79884f8989801755d8d120666dcb4e",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "adee91b86d129305f1d0b33c3b8e12b5220d0f24eb5514585077f62ea421827c": {
+    "hash": "bdfa0bbf7dd4626ea27d5ba3cbdcf86318f2a2c8b7b20442327c727736913829",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "afa63850ea6ebe42d9e7dabf402d2a6179453a91a739b085a88eca2ddbc466c2": {
+    "hash": "4cebac6f4fbc3a05c603f57a0fe0f838eb0bcaa620c93fefc2765adb74cc861e",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "b226f8b19cf7a034c00fe57d454c8591b1696312dc64fe53df8ad65a10f42a27": {
+    "hash": "a62dbcb6a70e25377e8cd6cb82c9013eade4b47a476a1290e21098e49523c417",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "b34b9197064466989e0cdd59c6d9ebfd1e443c425a3d00e0f3f45797cefa2973": {
+    "hash": "058a92d1d6889f2334e2f25d68a68b61b4dc72fe9c26f32c2e36164df16294b2",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "b5336ccfdd8bcc9ed21cd329cee3da02ec580b3aaf2d2b92d6701a6ae9a4bdc6": {
+    "hash": "18efb41117d0822df64ab53ee6fe7440193105849ba5176e14215fd4ecb36cc2",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "b66a219b422ad52043ca6105fcff9a5335446c953e80cc22200932eaf4813d49": {
+    "hash": "c0f67ad0bc6edf2e56f6194c379e3bc79f3d016782cdf9483e65734ab234da69",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "b93641db5641bbebe9cdf7bf0b52189ff6e4f6b9e1880cc293fc66ad8310d24f": {
+    "hash": "447ed65d95a7a657963faca2f909a77a86c006a1312a022636ed620433a48a65",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "b96e5c043c255ea451ab1490d0d0f693b6f99b73cb0adaa7d7a485930fb4844a": {
+    "hash": "1406358b8862b6ad442904d3a7aa73884a3ee5806265eae1b6cc4c8f5ec0efb3",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "b9acc5b24130f7f7e2da62975fb6e292356d90938bea0465432807be2a30a954": {
+    "hash": "6c7db20027da2416946aafcfbebe3d2d1dd35637d7674dec4cbcdd7838c034d6",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "ba5132747a7134550301c1172e8ed1e291fe46cbafd5d5c7fbc0ff702bf91fa8": {
+    "hash": "758b3bdc4eedd86d9923dfb86498625b312f1fc79be30f933c7ba489c7fbd913",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "bd28ce0481eebd1b46afec92b7dfc16cbce07260d743081415990b755ce15ab6": {
+    "hash": "fa4c88082ff3d68eed91e866e6ea4c8d0a69fd7efc82b39092656fb8cc65e8a4",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "bf093fc671856e2b84f5be08cea54e526f5eaabd04ef133ba4ac81993ada941c": {
+    "hash": "dc7d315a0a659b3e0541f840f190464b076c7f15d24c3e0fbf6533788258b5b1",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "c303977e8bf919cf09c7f7e98c5db131470c55db206d6a85bec926fc3dd9d7e4": {
+    "hash": "9dca0d01491083c69c61c24c78bafb2dfe710973c9662522137a8cd701df3741",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "c55a935809468b5273a4303597e0adcee0c10fe6f6efaf380ce6fdff75536fd6": {
+    "hash": "b09825fddf6abb8b11d0617065f413bfa428716816b52f3181bbbb7bc6370255",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "c76cfe8bba3c4904f6aafd8032923a2295764bb5b3980ea1fa3ee866b8977ad5": {
+    "hash": "850fbee569ed5c4d4fcc96647110e96b28ffe6f01746b13a968c986408d1f521",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "c823935771267058ed0a53c186655427a29e982565204a27700314b2bb8d2e7c": {
+    "hash": "9494fcc1b97a9ebe381ea412332a98af2178427267c303cdfe4ad3202547cf36",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "cae738273089d251bbdb60da9d76b1e5119f312bea9fa2e23958efe25999f1fe": {
+    "hash": "1854ae9478080fd9c3ca1e3a756837b95d22037eadcda266bcf3512efd3bf0d8",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "cc98fad81ea1203942cdffd69d9a4bdb93c3bca295eeba32fb9d1afa806833a3": {
+    "hash": "eb75348eac17939e413cbb18b108f308993d21db70125ee0e64bf9c9fb912b45",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "cfe2112c397618d723b09a91a7353d8c34af8499a5e30e1ad8d2637cca0b2f7d": {
+    "hash": "82d5f9c35de4786d64b9f2156d43a5134d0c8d2cb9b9ed2fe73a3fe706a31191",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "d0504f1a7f258c6b80c45171f730d7a92fddc945c28fa178dbed2a4ee32843e3": {
+    "hash": "73bf2f6a569f3f883c18e3bde86ff1faa6ba93f14d8059199ef968ef96ddf656",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "d24d2923a156d407c03cf187353a506b6e57f5982e3c39f3f1df7f402f557b4c": {
+    "hash": "bade604a046c0bddd8abf021c3d3e5e31fdc71f04ba821bfe464d677b0ef48d5",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "d310f0c4666e1efb043ae963eb9258e4aae5d10c25f20cfb09bc70dda73c80c5": {
+    "hash": "90b6584c5ca357e563a0abd4e097cb660e7abdc14a74bda489bb7e5474cbdc9f",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "d324e66f3941c7deeef2975131a16a9d61e4931a8f410635de595ec5b5e119da": {
+    "hash": "88f8c0f633cb02ce28fb43b3779ee65426a3da61b53294e29c1c5741dde28921",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "d45b4bbfa9fef2e385377640bc4b7bba49a80e8e026fd9199a4483eb07183ab6": {
+    "hash": "53fb881ce14e0ea8db386474c84c0e6e528fc211f937496bacaf406beb9bbe52",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "d694c54c5fc6cd31d1e3d992d34e48bf7de8ca6fc13b0fa5554a6990557c3fef": {
+    "hash": "15f2bd1c2a047e5b49997e5da187576f97edac288fb998eef8ca4fb1869744be",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "d95f2b4da57f4101cc4877eb72febdc06ad08d1ddc11bce9f09253bc56b70eaf": {
+    "hash": "64137bf5a95bccd3fa479fca0eb6fdd86175ccfe03b7bcd8649d25488d3713ff",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "daef4fc2a217da89ba1694e7a88c44c12e15b23db85dc072328900a603187bf4": {
+    "hash": "59630919f0d51e9a2fe3823034e9aabb8dda8cd1ece09edf754c5d451f5d8c0d",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "dbe771423d2f558ef8f7d3509ab71ee3a93a254177d423be3299548c904531da": {
+    "hash": "35313e04ff16ee4f1979e13229485ed6c5e5e22312d30f232d49bd23d0bdfa96",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "df89d176bd62790bfe783dd94aad85226964619d93f06958a60cdc25a1c93f26": {
+    "hash": "ee5db8b09c3a53112300286e5a867fcb379dba39838ef196c90dc4e9a69a183a",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "e89131610049954bacc9d573ddb88c236cc6712763fae0cdfad5a1f44a657277": {
+    "hash": "d094fdc203564546eb969188783f7b03a66657fa70a865a73b16fe5ed27d6e3c",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "e934d5600a7f6efe2fd012be391fe47a5a0715759641b416abbd5ab4ee3ab240": {
+    "hash": "777029e2c646ba3fc86e0fc480d0699b21e2ff94dae59fb4f967b2aa4c33e01e",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "ec800ce943c866cf2b138de05915a46db25bc742a4e9e4ca730dfc70e50282d0": {
+    "hash": "6ae9a250ec6809d99678569743b28b78337817adcfefd7d455e37e37e4acac5e",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "edeea2f7d0c3d8da08c83a58e6a6b390565adb695d65ffc515af16aa07e02f77": {
+    "hash": "d50bb243eddb1ffb164d7223a00549e90aa0d2595a200bde93874958f440d6b8",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "ee933f268ecbdf2d5ff18d8f31de47ef5193dc8974ae99fb539f2b262ed13737": {
+    "hash": "3366587f1e23766626b84c4cdc8f1f74a741f6770e4bf1649675fe9b0109ad52",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "ef014afcd44ac782fcb574b80d0b5fdec9eb5fa75e600e11941db99e29917150": {
+    "hash": "a64761cadf4ee21101c9383303e272442f69796f9eb5cd0718ba0e339aeb31e6",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "ef16bed5fd0e7180b4b0fc82be6cc0158e491289a6fcc3bc9642dbb2e3e4af79": {
+    "hash": "b7d765ad68ce436346402ca65ed53e288f25b0a987667b74ca7993e4b18e012e",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "ef4440e4077b11dbe60c72c3c5f2015cedfb70de63bd23099f9f4edbab29f9e6": {
+    "hash": "f87a501839f71b1763cbe65c17225bb8e702f6c2d01b31540ee2d37c45f9265c",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "f0ac91f6052252f073f0ed58f964fb24aa2214b4ccf8a9da55cf4963185743c9": {
+    "hash": "2b14248ee352cd9d468eb6ed9743e182e41c4d82363e5b8b1bf7fa20748e66d7",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "f0c5324b72aa5fc0d890ad755068cc96e77696b3710fd34bb7544cfc0ad0066e": {
+    "hash": "1f9599f032d2667217caf66be1108445cebd158e490dc500cf5d95621556a069",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "f2474d8c66f58a4202c53682c430689e5dad14004c8419d14f886143b7267db2": {
+    "hash": "a6b4b1e7f33bd0f09740a24f2be1e816b763dd7e2b03ac74e29cf7e276034075",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "f2778d6c3a75f31961b93fe577ea33dce574310524f587eb9e0c1438644ca16f": {
+    "hash": "59d3889524c84966babdf20c9d90ece4c929b5db2b3fae5dbf1b2f6467194498",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  },
+  "f29e174ea9ddc366524e0d8480ffa6fe5eefd6089e3d9932c041f74904fac8c3": {
+    "hash": "30eaa1352eed438a50b982fc1e4b409b0eef20b3e7819888dcab111f121886a6",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "f65817e502c729f130628902cd07fe83cb363d2fda13dd3542e647e9b24f4cda": {
+    "hash": "33079bfcbaab77501adc03d044fca1eb2d5a32e8694ae83a496db038919f9aa0",
+    "intent": "PROCEDURAL_MAPPING",
+    "rationale": "Detected procedural keywords (default/chunk/ordinal)."
+  },
+  "fab836c90c1812588a2c2d2fad4f354059895f2efd400d0c47160de2dc49faab": {
+    "hash": "614e1a78c178775822e89a21fac76ab105036b8a9024cc1e64796f7c112459bd",
+    "intent": "SIMPLE_FIELD_RULE",
+    "rationale": "Fallback to simple field mapping."
+  }
+}

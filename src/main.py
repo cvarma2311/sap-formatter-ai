@@ -1,107 +1,83 @@
 import argparse
-import os
-import pandas as pd
-from rule_loader import RuleLoader
-from ai_interpreter import RuleInterpreter
-from validator import Validator
-from report_generator import ReportGenerator
-from data_models import ExecutableRule
+import json
+from pathlib import Path
 
-def main():
-    """Main orchestration script for the AI-Powered Validation Framework."""
-    parser = argparse.ArgumentParser(description="AI-Powered XML/CSV Validation Framework.")
-    parser.add_argument("--rules", type=str, help="Path to the YAML rules file.", default="data/agile_mdg_rules.yaml")
-    parser.add_argument("--input-csv", type=str, default="data/agile_payload.csv", help="Path to the pre-flattened CSV file to validate.")
-    parser.add_argument("--id", type=str, default=None, help="Run validation for a single rule ID from the YAML file.")
-    parser.add_argument("--output-dir", type=str, default="reports", help="Directory to save reports.")
-    parser.add_argument("--skip-ai", action='store_true', help="Skip the AI interpretation step and run only static checks.")
-    
-    args = parser.parse_args()
+from src.orchestration.rule_graph import compile_rules
+from src.rule_loader import load_rules
+from src.utils.logging import get_logger
 
-    if not os.path.exists(args.output_dir):
-        os.makedirs(args.output_dir)
+logger = get_logger(__name__)
 
-    print("--- Starting Validation Process ---")
-    
-    # 1. Load rules from YAML
-    try:
-        loader = RuleLoader()
-        all_rules = loader.load_from_yaml(args.rules)
-    except (FileNotFoundError, ValueError) as e:
-        print(f"Error loading rules: {e}")
+
+def write_outputs(catalog, out_path: Path) -> None:
+    parent = out_path.parent
+    if parent.exists() and not parent.is_dir():
+        raise ValueError(f"Output parent path exists and is not a directory: {parent}")
+    parent.mkdir(parents=True, exist_ok=True)
+
+    payload = catalog.model_dump(mode="json")
+    with out_path.open("w") as f:
+        json.dump(payload, f, separators=(",", ":"))
+
+    pretty_path = out_path.with_suffix(".pretty.json")
+    with pretty_path.open("w") as f:
+        json.dump(payload, f, indent=2)
+
+    # Build a lightweight index for quick lookup
+    index = {
+        rule.unique_id: {
+            "table": rule.table_name,
+            "field": rule.field_name,
+            "relation_keys": rule.relation_keys,
+        }
+        for rule in catalog.field_rules
+    }
+    with out_path.with_name("rule_index.json").open("w") as f:
+        json.dump(index, f, indent=2)
+
+    compile_log = {
+        "field_rule_count": len(catalog.field_rules),
+        "procedural_rule_count": len(catalog.procedural_rules),
+        "output": str(out_path),
+    }
+    with out_path.with_name("compile_log.json").open("w") as f:
+        json.dump(compile_log, f, indent=2)
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="AI-assisted rule compilation framework")
+    parser.add_argument("--rules", default="data/agile_mdg_rules.yaml", help="Path to YAML rules file")
+    parser.add_argument("--validation-description", default=None, help="Validation description for catalog metadata")
+    parser.add_argument("--out", default="rules/compiled/compiled_rules.json", help="Path to compiled JSON output")
+    parser.add_argument("--id", dest="rule_id", default=None, help="Optional rule id filter")
+    parser.add_argument("--skip-ai", action="store_true", help="Skip AI-dependent steps (heuristics only)")
+    return parser.parse_args()
+
+
+def main() -> None:
+    args = parse_args()
+    if args.skip_ai:
+        logger.info("skip-ai enabled: running heuristics-only pipeline.")
+    rules_path = Path(args.rules)
+    if not rules_path.exists():
+        raise FileNotFoundError(f"Rules file not found: {rules_path}")
+
+    rules, input_hash = load_rules(rules_path, rule_id=args.rule_id)
+    if not rules:
+        logger.warning("No rules loaded; exiting.")
         return
 
-    # Filter for a single rule if an ID is provided
-    if args.id:
-        print(f"--- Filtering for single rule ID: {args.id} ---")
-        rules_to_process = [r for r in all_rules if r.id == args.id]
-        if not rules_to_process:
-            print(f"Error: Rule ID '{args.id}' not found in {args.rules}.")
-            return
-    else:
-        rules_to_process = all_rules
+    out_path = Path(args.out)
+    if args.rule_id:
+        # Ensure per-rule outputs are named {ruleid}-compile.json inside the provided directory.
+        suffix = out_path.suffix or ".json"
+        parent = out_path.parent if out_path.suffix else out_path
+        out_path = parent / f"{args.rule_id}-compile{suffix}"
 
-    # 2. Load the pre-flattened CSV data
-    df = pd.DataFrame()
-    try:
-        print(f"--- Loading data from CSV: {args.input_csv} ---")
-        df = pd.read_csv(args.input_csv)
-        print(f"Successfully loaded CSV with shape {df.shape}.")
-    except FileNotFoundError:
-        print(f"Error: Input CSV file '{args.input_csv}' not found.")
-        return
-    except Exception as e:
-        print(f"Error loading input CSV: {e}")
-        return
-    
-    # 3. Interpret rules with AI (optional)
-    executable_rules = []
-    if not args.skip_ai:
-        api_key = ""
-        if not api_key:
-            print("Warning: OPENAI_API_KEY not set. Skipping AI interpretation. To run AI rules, set the environment variable.")
-        else:
-            interpreter = RuleInterpreter(api_key=api_key, raw_df=df)
-            for rule in rules_to_process:
-                if rule.description: # Only interpret if a description exists
-                    executable_rules.extend(interpreter.interpret_rule(rule))
-    else:
-        print("Skipping AI rule interpretation as requested.")
-        
-    # If an ID was specified, print the AI's interpretation plan
-    if args.id and executable_rules:
-        print(f"\n--- AI-Generated Validation Plan for Rule '{args.id}' ---")
-        for i, exec_rule in enumerate(executable_rules):
-            print(f"Step {i+1}:")
-            print(exec_rule.model_dump_json(indent=2))
-        print("----------------------------------------------------\n")
+    catalog = compile_rules(rules, args.validation_description, input_hash)
+    write_outputs(catalog, out_path)
+    logger.info("Compilation complete. Field rules: %s, procedural rules: %s", len(catalog.field_rules), len(catalog.procedural_rules))
 
-    # Always add static rules (required, length, etc.) for the rules being processed
-    for rule in rules_to_process:
-        if rule.source_field: # Only add static checks if a source field is defined
-            base_rule_props = {'id': rule.id, 'severity': rule.severity, 'source_column': rule.source_field}
-            if rule.required:
-                executable_rules.append(ExecutableRule(type='REQUIRED_CHECK', **base_rule_props))
-            if rule.max_length > 0:
-                executable_rules.append(ExecutableRule(type='LENGTH_CHECK', expected_value=str(rule.max_length), **base_rule_props))
-
-    # 4. Validate Data
-    validator = Validator(df)
-    results = validator.execute(executable_rules)
-
-    # 5. Generate reports
-    report_suffix = f"_{args.id}" if args.id else ""
-    report_generator = ReportGenerator(results)
-    report_generator.generate_html(
-        "templates/report_template.html", 
-        os.path.join(args.output_dir, f"validation_report{report_suffix}.html")
-    )
-    report_generator.generate_csv(os.path.join(args.output_dir, f"validation_report{report_suffix}.csv"))
-    report_generator.generate_excel(os.path.join(args.output_dir, f"validation_report{report_suffix}.xlsx"))
-    
-    print(f"--- Validation Process Finished ---")
-    print(f"Found {len(results)} total validation failures.")
-    print(f"Reports generated in '{args.output_dir}' directory.")
 
 if __name__ == "__main__":
     main()

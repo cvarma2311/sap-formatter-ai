@@ -1,5 +1,0 @@
-rule_id,severity,status,csv_row,csv_column,field_value,expected,actual,message
-M-001,E,Pass,ProductMDMBulkReplicateRequestMessage.ProductMDMReplicateRequestMessage.Product,ProductInternalID,920-94-354,CHAR,920-94-354,Field 'ProductInternalID' matches expected type 'CHAR'.
-M-001,E,Pass,ProductMDMBulkReplicateRequestMessage.ProductMDMReplicateRequestMessage.Product,ProductInternalID,920-94-354,Value must be present,920-94-354,Field 'ProductInternalID' is present.
-M-001,E,Pass,ProductMDMBulkReplicateRequestMessage.ProductMDMReplicateRequestMessage.Product,ProductInternalID,920-94-354,18,920-94-354,Length of 'ProductInternalID' within allowed maximum 18.
-M-001,E,Pass,ProductMDMBulkReplicateRequestMessage.ProductMDMReplicateRequestMessage.Product,ProductInternalID,920-94-354,920-94-354,920-94-354,Values match for 'ProductInternalID' and 'ReceiverProductInternalID'.

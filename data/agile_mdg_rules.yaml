@@ -1264,7 +1264,7 @@ rules:
   type: CHAR
   required: true
   severity: E
-  description: "Default the below values when MATERIAL_BASIC_TEXT is not blank\n1.Default TextExistsIndicator as 'X'\n2.Default TypeCode as 'GRUN'\n3.Default LanguageCode as 'en'\n4. Default SAPScriptLineFormatCode as '*'\n5.Pass the OrdinalNumberValue as '1' and map the attribute value (first 72 characters) in SAPScriptLineText\n - Increment the OrdinalNumberValue by 1 and map the attribute value (next 72 characters) in SAPScriptLineText\n "
+  description: "Default the below values when MATERIAL_BASIC_TEXT is not blankbut \n1.Default TextExistsIndicator as 'X'\n2.Default TypeCode as 'GRUN'\n3.Default LanguageCode as 'en'\n4. Default SAPScriptLineFormatCode as '*'\n5.Pass the OrdinalNumberValue as '1' and map the attribute value (first 72 characters) in SAPScriptLineText\n - Increment the OrdinalNumberValue by 1 and map the attribute value (next 72 characters) in SAPScriptLineText\n "
   target:
     structure: MARA_SRC
     field: TDNAME
