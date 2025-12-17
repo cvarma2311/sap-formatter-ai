@@ -1,9 +1,11 @@
 import argparse
 import json
+import os
 from pathlib import Path
 
 from src.orchestration.rule_graph import compile_rules_with_cache
 from src.rule_loader import load_rules
+from src.utils.env import load_env_file
 from src.utils.logging import get_logger
 
 logger = get_logger(__name__)
@@ -53,13 +55,18 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--skip-ai", action="store_true", help="Skip AI-dependent steps (heuristics only)")
     parser.add_argument("--cache-dir", default=".cache", help="Directory for caches (intent/transformation).")
     parser.add_argument("--no-cache", action="store_true", help="Disable caching for debugging.")
+    parser.add_argument("--debug-trace", action="store_true", help="Enable LangGraph debug tracing and emit .debug.json")
     return parser.parse_args()
 
 
 def main() -> None:
+    load_env_file()
     args = parse_args()
     if args.skip_ai:
         logger.info("skip-ai enabled: running heuristics-only pipeline.")
+    if os.environ.get("LANGCHAIN_TRACING_V2"):
+        logger.info("LangSmith tracing enabled via LANGCHAIN_TRACING_V2.")
+
     rules_path = Path(args.rules)
     if not rules_path.exists():
         raise FileNotFoundError(f"Rules file not found: {rules_path}")
@@ -78,14 +85,19 @@ def main() -> None:
 
     cache_dir = None if args.no_cache else Path(args.cache_dir)
 
-    catalog = compile_rules_with_cache(
+    catalog, debug_traces = compile_rules_with_cache(
         rules,
         args.validation_description,
         input_hash,
         cache_dir=cache_dir,
         use_cache=not args.no_cache,
+        debug=args.debug_trace,
     )
     write_outputs(catalog, out_path)
+    if args.debug_trace and debug_traces:
+        debug_path = out_path.with_suffix(".debug.json")
+        with debug_path.open("w") as f:
+            json.dump(debug_traces, f, indent=2)
     logger.info("Compilation complete. Field rules: %s, procedural rules: %s", len(catalog.field_rules), len(catalog.procedural_rules))
 
 

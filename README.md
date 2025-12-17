@@ -1,6 +1,6 @@
 # AI-Assisted Rule Compilation Framework
 
-Compile human-authored SAP mapping rules (YAML/XLS-derived) into a deterministic JSON rule catalog. The pipeline uses heuristics (LLM hooks are stubbed) to classify intents, normalize fields, and emit both field rules and procedural rules.
+Compile human-authored SAP mapping rules (YAML/XLS-derived) into a deterministic JSON rule catalog. The pipeline uses LangGraph for orchestration and heuristics (LLM hooks are stubbed) to classify intents, normalize fields, and emit both field rules and procedural rules.
 
 ## What it does (end-to-end flow)
 - **Load & validate YAML**: `rule_loader.py` ingests mapping rules (`data/agile_mdg_rules.yaml`), validates into `MappingRule`, and hashes the input for metadata.
@@ -21,7 +21,7 @@ Compile human-authored SAP mapping rules (YAML/XLS-derived) into a deterministic
 - `src/normalization/` – Type, ID, transformation, and relation normalizers.
 - `src/agents/` – Heuristic agents: intent, identity, relation, validation, transformations, multi-target, procedural IR, repair stubs.
 - `src/assembler/` – Builders for field rules, procedural rules, and final catalog.
-- `src/orchestration/rule_graph.py` – End-to-end compilation pipeline with caching hooks.
+- `src/orchestration/rule_graph.py` – LangGraph-based DAG orchestration with caching hooks.
 - `src/main.py` – CLI entrypoint.
 - `data/` – Sample mapping and payload artifacts (`agile_mdg_rules.yaml`, `Agile_payload.xml`, `agile_payload.csv`, `Agile_MDG_Mapping.xlsx`).
 
@@ -51,9 +51,87 @@ poetry run python -m src.main --id M-001
 poetry run python -m src.main --no-cache
 poetry run python -m src.main --cache-dir .cache_custom
 
+# Enable LangGraph debug tracing (writes alongside outputs)
+poetry run python -m src.main --debug-trace
+
+# Enable LangSmith tracing (requires account & API key)
+export LANGCHAIN_API_KEY="your-langsmith-key"
+export LANGCHAIN_TRACING_V2=true
+# optional project name
+export LANGCHAIN_PROJECT="sap-rule-compiler"
+poetry run python -m src.main --rules data/agile_mdg_rules.yaml
+# Alternatively, place these in a local .env (auto-loaded) and run the same command.
+
 # Run tests
 poetry run pytest
 ```
+
+## How to
+- **Compile all rules**: `poetry run python -m src.main --rules data/agile_mdg_rules.yaml --out rules/compiled/compiled_rules.json`
+- **Compile a specific rule**: `poetry run python -m src.main --rules data/agile_mdg_rules.yaml --id M-001 --out rules/compiled/compiled_rules.json`
+  - Outputs: `rules/compiled/M-001-compile.json`, `.pretty.json`, `rule_index.json`, `compile_log.json`
+- **Enable LangGraph traces**: add `--debug-trace` to any run
+  - Example: `poetry run python -m src.main --rules data/agile_mdg_rules.yaml --debug-trace --out rules/compiled/compiled_rules.json`
+  - Outputs an additional `rules/compiled/compiled_rules.debug.json` (or `{ruleid}-compile.debug.json` for per-rule runs)
+- **Disable/relocate caches**: `--no-cache` or `--cache-dir .cache_custom`
+- **Run tests**: `poetry run pytest`
+
+## LangGraph orchestration
+- The DAG in `src/orchestration/rule_graph.py` runs nodes in sequence: `classify_intent -> identity -> validation -> transformations -> route -> (procedural | field) -> END`.
+- To trace execution, wrap the compiled app:
+  ```python
+  from src.orchestration.rule_graph import _build_graph
+  graph = _build_graph(intent_cache=None, transform_cache=None)
+  app = graph.compile()
+  # Enable debug tracing
+  result = app.invoke(state, debug=True)
+  print(result.get("__debug__"))
+  ```
+  (For CLI runs, you can set `DEBUG=1` and add logging to nodes as needed.)
+- CLI flag `--debug-trace` enables LangGraph debug traces and writes `<out>.debug.json` next to the compiled outputs.
+- To instrument further, add logging inside the node functions in `rule_graph.py` or wrap `app.invoke` with your own tracing hooks.
+
+## How to read traces
+- The `*.debug.json` file contains per-rule LangGraph debug data with node execution order, inputs, and outputs.
+- For each rule, trace entries typically include:
+  - `node`: DAG node name (e.g., `classify_intent`, `identity`, `validation`, `transformations`, `build_field`, `build_procedural`)
+  - `input` / `output`: serialized state fragments before/after the node
+  - `time` / `duration`: timing metadata if provided by the LangGraph version
+- There’s no bundled UI here; options to visualize:
+  - Load the debug JSON in a notebook or small HTML/JS timeline to inspect node transitions.
+  - Add structured logging in `rule_graph.py` nodes for real-time CLI visibility.
+  - Integrate with an external tracer (e.g., LangSmith) by configuring its client around the graph compile/invoke calls if you want a UI-based view.
+
+## LangSmith integration
+- Requires a LangSmith account/API key (free tier/trial available; check LangSmith pricing).
+- Set environment variables before running:
+  ```bash
+  export LANGCHAIN_API_KEY="your-langsmith-key"
+  export LANGCHAIN_TRACING_V2=true
+  export LANGCHAIN_PROJECT="sap-rule-compiler"  # optional
+  poetry run python -m src.main --rules data/agile_mdg_rules.yaml
+  ```
+- With these set, LangGraph will emit traces to LangSmith; inspect them in the LangSmith UI under your project. No code changes needed beyond env vars (langsmith dependency is included).
+- You can also place these in a local `.env` (auto-loaded). To verify they’re picked up:
+  ```bash
+  poetry run python - <<'PY'
+  import os
+  from src.utils.env import load_env_file
+  load_env_file()
+  print("Has API key:", bool(os.getenv("LANGCHAIN_API_KEY")))
+  print("Tracing v2:", os.getenv("LANGCHAIN_TRACING_V2"))
+  print("Project:", os.getenv("LANGCHAIN_PROJECT"))
+  print("Endpoint:", os.getenv("LANGCHAIN_ENDPOINT"))
+  PY
+  ```
+- If you see `Has API key: False`, update `.env` at repo root with:
+  ```
+  LANGCHAIN_API_KEY=your-key
+  LANGCHAIN_TRACING_V2=true
+  LANGCHAIN_PROJECT=sap-rule-compiler        # optional
+  LANGCHAIN_ENDPOINT=https://api.smith.langchain.com   # or https://eu.api.smith.langchain.com for EU
+  ```
+- 403/Forbidden from LangSmith usually means invalid/expired key or wrong region endpoint. Regenerate the key and/or set `LANGCHAIN_ENDPOINT` for your region, then rerun the CLI.
 
 ## Outputs
 - `compiled_rules.json` – Minified catalog.
