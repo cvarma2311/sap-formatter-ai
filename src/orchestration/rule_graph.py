@@ -8,6 +8,7 @@ from src.agents.chunking_agent import normalize_chunking
 from src.agents.defaulting_agent import normalize_defaults
 from src.agents.identity_agent import resolve_identity
 from src.agents.intent_classifier import classify_intent
+from src.agents.lookup_agent import parse_lookup_entries
 from src.agents.multitarget_agent import build_multitarget_specs
 from src.agents.procedural_ir_agent import build_procedural_ir
 from src.agents.relation_agent import resolve_relation
@@ -22,11 +23,13 @@ from src.data_models import (
     ConstraintSpec,
     DataType,
     FieldRule,
+    FilterEntry,
+    LookupEntry,
     MappingRule,
     ProceduralRule,
     RuleIntent,
     SourceTargetSpec,
-    TransformationType,
+    TransformationConfig,
     ValidationFunction,
 )
 from src.normalization.relation_normalizer import make_relation_key
@@ -43,10 +46,12 @@ class RuleState(TypedDict, total=False):
     identity: Tuple[str, str] | None
     relation_key: str | None
     validation: Tuple[DataType, ValidationFunction, ConstraintSpec | None] | None
-    transformations: List[TransformationType]
+    transformations_config: List[TransformationConfig]
     transform_issues: List[str]
     field_rules: List[FieldRule]
     procedural_rules: List[ProceduralRule]
+    lookups: List[LookupEntry]
+    filters: List[FilterEntry]
 
 
 def _intent_with_cache(rule: MappingRule, cache: Optional[LocalCache]) -> Tuple[RuleIntent, dict]:
@@ -66,17 +71,37 @@ def _transformations_with_cache(description: str, cache: Optional[LocalCache]):
     if cache:
         cached = cache.get(key)
         if cached:
-            return [t for t in cached.get("transformations", [])], cached.get("issues", [])
+            return [
+                TransformationConfig.model_validate(t) if isinstance(t, dict) else TransformationConfig(function=t)
+                for t in cached.get("transformations", [])
+            ], cached.get("issues", [])
     transformations, issues = resolve_transformations(description)
     if cache:
         cache.set(
             key,
-            {"transformations": [t.value if hasattr(t, "value") else str(t) for t in transformations], "issues": issues},
+            {"transformations": [t.model_dump() if hasattr(t, "model_dump") else str(t) for t in transformations], "issues": issues},
         )
     return transformations, issues
 
 
-def _build_graph(intent_cache: Optional[LocalCache], transform_cache: Optional[LocalCache]) -> StateGraph:
+def _lookups_with_cache(description: str, cache: Optional[LocalCache], csv_path: Path | None):
+    key = hash_text(description)
+    if cache:
+        cached = cache.get(key)
+        if cached:
+            return [LookupEntry.model_validate(le) for le in cached.get("lookups", [])]
+    lookups = parse_lookup_entries(description, csv_path=csv_path if csv_path and csv_path.exists() else None)
+    if cache:
+        cache.set(key, {"lookups": [l.model_dump() for l in lookups]})
+    return lookups
+
+
+def _build_graph(
+    intent_cache: Optional[LocalCache],
+    transform_cache: Optional[LocalCache],
+    lookup_cache: Optional[LocalCache],
+    csv_path: Path | None,
+) -> StateGraph:
     graph: StateGraph = StateGraph(RuleState)
 
     def classify_node(state: RuleState) -> RuleState:
@@ -97,20 +122,32 @@ def _build_graph(intent_cache: Optional[LocalCache], transform_cache: Optional[L
 
     def transformation_node(state: RuleState) -> RuleState:
         transformations_raw, issues = _transformations_with_cache(state["rule"].description or "", transform_cache)
-        transformations = [
-            t if isinstance(t, TransformationType) else TransformationType(t) for t in transformations_raw
-        ]
-        state["transformations"] = transformations
+        state["transformations_config"] = transformations_raw
         state["transform_issues"] = issues
         for issue in issues:
             logger.warning("Rule %s needs review: %s", state["rule"].id, issue)
+        return state
+
+    def enrichment_node(state: RuleState) -> RuleState:
+        rule = state["rule"]
+        lookups = _lookups_with_cache(rule.description or "", lookup_cache, csv_path)
+        state.setdefault("lookups", []).extend(lookups)
+        state.setdefault("filters", []).extend(parse_filters(rule.description or ""))
         return state
 
     def route_selector(state: RuleState) -> str:
         intent = state.get("intent")
         if intent == RuleIntent.PROCEDURAL_MAPPING:
             return "procedural"
+        if intent == RuleIntent.LOOKUP_RULE:
+            return "lookup"
         return "field"
+
+    def build_lookup_node(state: RuleState) -> RuleState:
+        rule = state["rule"]
+        lookups = _lookups_with_cache(rule.description or "", lookup_cache, csv_path)
+        state.setdefault("lookups", []).extend(lookups)
+        return state
 
     def build_procedural_node(state: RuleState) -> RuleState:
         rule = state["rule"]
@@ -153,7 +190,9 @@ def _build_graph(intent_cache: Optional[LocalCache], transform_cache: Optional[L
         (table_name, field_name) = state["identity"]
         relation_key = state["relation_key"]
         data_type, validation_fn, constraints = state["validation"]
-        transformations = state.get("transformations") or []
+        transformations = state.get("transformations_config") or []
+        lookups = state.get("lookups") or []
+        filters = state.get("filters") or []
 
         primary_target, additional_targets = build_multitarget_specs(
             rule.target.structure or table_name,
@@ -172,6 +211,8 @@ def _build_graph(intent_cache: Optional[LocalCache], transform_cache: Optional[L
                     validation_function=validation_fn,
                     constraints=constraints,
                     transformations=transformations,
+                    lookups=lookups,
+                    filters=filters,
                     relation_keys=rel_key or "",
                 )
                 state.setdefault("field_rules", []).append(fr)
@@ -199,24 +240,29 @@ def _build_graph(intent_cache: Optional[LocalCache], transform_cache: Optional[L
     graph.add_node("identity", identity_node)
     graph.add_node("validation", validation_node)
     graph.add_node("transformations", transformation_node)
+    graph.add_node("enrichments", enrichment_node)
     graph.add_node("route", lambda s: s)
     graph.add_node("build_procedural", build_procedural_node)
+    graph.add_node("build_lookup", build_lookup_node)
     graph.add_node("build_field", build_field_node)
 
     graph.add_edge(START, "classify_intent")
     graph.add_edge("classify_intent", "identity")
     graph.add_edge("identity", "validation")
     graph.add_edge("validation", "transformations")
-    graph.add_edge("transformations", "route")
+    graph.add_edge("transformations", "enrichments")
+    graph.add_edge("enrichments", "route")
     graph.add_conditional_edges(
         "route",
         route_selector,
         {
             "procedural": "build_procedural",
+            "lookup": "build_lookup",
             "field": "build_field",
         },
     )
     graph.add_edge("build_procedural", END)
+    graph.add_edge("build_lookup", END)
     graph.add_edge("build_field", END)
     return graph
 
@@ -227,7 +273,7 @@ def compile_rules(
     input_hash: str | None,
 ) -> Catalog:
     catalog, _ = compile_rules_with_cache(
-        rules, validation_description, input_hash, cache_dir=Path(".cache"), use_cache=True, debug=False
+        rules, validation_description, input_hash, cache_dir=Path(".cache"), use_cache=True, debug=False, csv_path=None
     )
     return catalog
 
@@ -239,15 +285,18 @@ def compile_rules_with_cache(
     cache_dir: Path | None,
     use_cache: bool,
     debug: bool = False,
+    csv_path: Path | None = None,
 ) -> Tuple[Catalog, List[Dict[str, Any]]]:
     intent_cache = LocalCache(cache_dir / "intent_cache.json") if use_cache and cache_dir else None
     transform_cache = LocalCache(cache_dir / "transform_cache.json") if use_cache and cache_dir else None
+    lookup_cache = LocalCache(cache_dir / "lookup_cache.json") if use_cache and cache_dir else None
 
-    graph = _build_graph(intent_cache, transform_cache)
+    graph = _build_graph(intent_cache, transform_cache, lookup_cache, csv_path)
     app = graph.compile()
 
     field_rules: List[FieldRule] = []
     procedural_rules: List[ProceduralRule] = []
+    lookups: List[LookupEntry] = []
     debug_traces: List[Dict[str, Any]] = []
 
     for rule in rules:
@@ -257,10 +306,12 @@ def compile_rules_with_cache(
             "identity": None,
             "relation_key": None,
             "validation": None,
-            "transformations": [],
+            "transformations_config": [],
             "transform_issues": [],
             "field_rules": [],
             "procedural_rules": [],
+            "lookups": [],
+            "filters": [],
         }
         if debug:
             result = app.invoke(initial_state, debug=True)
@@ -276,6 +327,7 @@ def compile_rules_with_cache(
             final_state: RuleState = app.invoke(initial_state)
         field_rules.extend(final_state.get("field_rules", []))
         procedural_rules.extend(final_state.get("procedural_rules", []))
+        lookups.extend(final_state.get("lookups", []))
 
-    catalog = assemble_catalog(field_rules, procedural_rules, validation_description, input_hash)
+    catalog = assemble_catalog(field_rules, procedural_rules, lookups, validation_description, input_hash)
     return catalog, debug_traces

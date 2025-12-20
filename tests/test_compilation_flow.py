@@ -14,6 +14,7 @@ def test_compile_single_rule_no_cache():
         cache_dir=None,
         use_cache=False,
         debug=False,
+        csv_path=None,
     )
     # Expect either field or procedural outputs
     assert catalog.field_rules or catalog.procedural_rules

@@ -83,6 +83,10 @@ def main() -> None:
         parent = out_path.parent if out_path.suffix else out_path
         out_path = parent / f"{args.rule_id}-compile{suffix}"
 
+    csv_hint_path = Path("data/agile_payload.csv")
+    if not csv_hint_path.exists():
+        csv_hint_path = None
+
     cache_dir = None if args.no_cache else Path(args.cache_dir)
 
     catalog, debug_traces = compile_rules_with_cache(
@@ -92,6 +96,7 @@ def main() -> None:
         cache_dir=cache_dir,
         use_cache=not args.no_cache,
         debug=args.debug_trace,
+        csv_path=csv_hint_path,
     )
     write_outputs(catalog, out_path)
     if args.debug_trace and debug_traces:

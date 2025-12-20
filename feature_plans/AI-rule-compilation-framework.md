@@ -387,3 +387,52 @@ Compilation outcome:
 - **Milestone 4:** Procedural IR pipeline (defaults + chunking); ProceduralRuleAssembler
 - **Milestone 5:** RepairAgent + error persistence; Output JSON + pretty + index + logs
 
+## 12) Extension Plan: Source/Target-Scoped Lookups, Filters, and Transformations
+
+### 12.1 Schema extensions (nested under source/target)
+- **SourceTargetSpec**: add nested arrays:
+  - `lookups[]` (conditions/expected/default entries scoped to source or target)
+  - `filters[]` (field/value/operator predicates applied before/after transforms)
+  - `transformations[]` (extend current list with typed configs: string/math/probabilistic)
+- **LookupEntry (scoped)**:
+  - `rule_type` enum: CONDITION, EXPECTED, DEFAULT
+  - `source_type` enum: TABLE, CONSTANT, XPATH, CSV_HINT
+  - `field`, `cond_value`, `operator` enum (AND, OR, EQUAL, NOT_EQUAL, IN, NOT_IN, GT, GTE, LT, LTE, NONE), `expected_result`
+- **FilterEntry**:
+  - `field`, `operator` (EQUAL, NOT_EQUAL, IN, NOT_IN, GT, GTE, LT, LTE, CONTAINS, STARTS_WITH, ENDS_WITH), `value`, `logic` (AND/OR chaining)
+- **TransformationEntry (typed)**:
+  - `function` enum (CONCAT, LEFT_PAD, RIGHT_PAD, UPPER, LOWER, TRIM, IS_TEXT, IS_NUMBER, SUBSTRING, ADD, SUBTRACT, MULTIPLY, DIVIDE, PROBABILITY_THRESHOLD)
+  - `params` object (e.g., pad_char, pad_length, substring_start/length, concat_fields, numeric operands, probability_threshold)
+
+### 12.2 Agents (modular, per concern)
+- **LookupAgent (scoped)**: parse description into ordered lookups; infer table/field from xpath/arrow notation; use CSV header hints (data/agile_payload.csv) for source/target field alignment; enforce enums.
+- **FilterAgent**: parse filter phrasing (“only when <field> = <value>”, “exclude where…”, “greater than…”) into FilterEntry list with logic chaining.
+- **TransformationAgent (extended)**: map string/math/probabilistic verbs to typed TransformationEntry; prompt for pad char/length if implied; mark NEEDS_REVIEW on unknown.
+- Run per side: attach outputs to `source.lookups/filters/transformations` and `target.lookups/filters/transformations`.
+
+### 12.3 Orchestration updates (LangGraph)
+- Add branches after identity/validation:
+  - `build_source_enrichments` → LookupAgent/FilterAgent/TransformationAgent for source.
+  - `build_target_enrichments` → same for target.
+- Router stays intent-based (field/procedural/lookup); enrichments run for field and lookup paths; procedural may skip or use source filters.
+- Caching: add lookup/filter/transform caches keyed by description hash; still optional via CLI flags.
+
+### 12.4 Assembly updates
+- **FieldRuleAssembler**: include source/target `lookups`, `filters`, `transformations` in `SourceTargetSpec`.
+- **ProceduralRuleAssembler**: optionally accept source/target filters if needed for conditional defaults.
+- Preserve ordering from agents; do not resort lookups/filters/transformations.
+
+### 12.5 CSV/XPath alignment
+- Helper scans `data/agile_payload.csv` headers for close matches to xpath leafs/arrow segments; annotate with `source_type=CSV_HINT` when matched.
+- Fallback to TABLE/XPATH names when no match.
+
+### 12.6 Testing
+- Unit tests per agent:
+  - Lookups: defaults/expected with arrow notation; AND/OR operators; CSV hints.
+  - Filters: parse EQUAL/IN/GT/LT/CONTAINS patterns; logic chaining.
+  - Transformations: pad/concat/substring/upper/lower/math/probability threshold params.
+- Integration: LangGraph run on sample rules yielding populated source/target lookups/filters/transforms in catalog.
+
+### 12.7 Documentation
+- README: update schema examples showing source/target-scoped lookups/filters/transformations; phrasing guidance; CSV hint usage.
+- Trace/debug: `--debug-trace` and LangSmith capture lookup/filter/transform nodes when enabled.

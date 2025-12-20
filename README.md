@@ -10,6 +10,7 @@ Compile human-authored SAP mapping rules (YAML/XLS-derived) into a deterministic
 - **Transformations**: `transformation_agent.py` maps phrases to enumerated transformations (not_null/trim/upper/pad_left/substring) with review notices for unknowns.
 - **Multi-target mapping**: `multitarget_agent.py` detects “Additionally map …” phrases and emits extra targets.
 - **Procedural IR**: `procedural_ir_agent.py` extracts defaults, chunking (size/ordinal), row expansion (delimiter/target), conditions, and ordered steps. Variants include `TEXT_DEFAULTS_AND_CHUNKING`, `TEXT_CHUNKING`, `DEFAULTING_ONLY`, `CONDITIONAL_DEFAULTS`, `ROW_EXPANSION`, `GENERIC_PROCEDURAL`.
+- **Lookup/Default rules**: `lookup_agent.py` parses lookup/default/expected patterns into ordered `lookups[]` entries, with CSV header hints (from `data/agile_payload.csv`) to align field names.
 - **Normalization**: `normalization/` enforces deterministic type mapping, IDs, relation keys, and transformation enums.
 - **Repair hook**: `repair_agent.py` attempts light enum normalization and annotates NEEDS_REVIEW fragments on validation failures.
 - **Assembly**: `assembler/` builds `FieldRule`, `ProceduralRule`, and the final `Catalog` with deterministic ordering and metadata (schema_version, generated_at, compiler_version, input_hash).
@@ -28,6 +29,7 @@ Compile human-authored SAP mapping rules (YAML/XLS-derived) into a deterministic
 ## Core behaviors
 - **Field rules**: `unique_id = {table}.{field}`, relation keys `{target.structure}.{target.field}`, deterministic ordering by table/field/id.
 - **Procedural rules**: support defaults, text chunking with ordinal sequencing, conditional defaults, row expansion (with delimiter), and generic procedural fallback; steps are explicitly ordered (e.g., `apply_defaults`, `chunk_text`, `add_ordinal_sequence`, `row_expansion`, `split_by_delimiter`).
+- **Lookups**: ordered `lookups[]` entries with enums for rule_type/operator/source_type; defaults/expected values derived from descriptions, optionally hinted by CSV headers (e.g., `data/agile_payload.csv`).
 - **Constraints**: propagate required, max_length, severity, allowed_values, regex pattern, and numeric range when present.
 - **Transformations**: only enumerated values emitted; unknown phrases are flagged via compile warnings.
 - **Caching**: intent and transformation results cached to JSON (optional); disable via `--no-cache` or relocate via `--cache-dir`.
@@ -75,6 +77,7 @@ poetry run pytest
   - Outputs an additional `rules/compiled/compiled_rules.debug.json` (or `{ruleid}-compile.debug.json` for per-rule runs)
 - **Disable/relocate caches**: `--no-cache` or `--cache-dir .cache_custom`
 - **Run tests**: `poetry run pytest`
+- **Lookup/default rules**: descriptions like `Default Quantity as 'EA' (Product->QuantityCharacteristic->Quantity)` or “Map the attribute value in unitCode” are parsed into `lookups[]` with ordered defaults/expected values; CSV headers (e.g., `data/agile_payload.csv`) are used to hint matching fields.
 
 ## LangGraph orchestration
 - The DAG in `src/orchestration/rule_graph.py` runs nodes in sequence: `classify_intent -> identity -> validation -> transformations -> route -> (procedural | field) -> END`.

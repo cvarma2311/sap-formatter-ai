@@ -50,6 +50,33 @@ class RuleType(str, Enum):
     GENERIC_PROCEDURAL = "GENERIC_PROCEDURAL"
 
 
+class LookupRuleType(str, Enum):
+    CONDITION = "CONDITION"
+    EXPECTED = "EXPECTED"
+    DEFAULT = "DEFAULT"
+
+
+class LookupOperator(str, Enum):
+    AND = "AND"
+    OR = "OR"
+    EQUAL = "EQUAL"
+    NOT_EQUAL = "NOT_EQUAL"
+    IN = "IN"
+    NOT_IN = "NOT_IN"
+    GT = "GT"
+    GTE = "GTE"
+    LT = "LT"
+    LTE = "LTE"
+    NONE = "NONE"
+
+
+class LookupSourceType(str, Enum):
+    TABLE = "TABLE"
+    CONSTANT = "CONSTANT"
+    XPATH = "XPATH"
+    CSV_HINT = "CSV_HINT"
+
+
 class ConditionType(str, Enum):
     ALWAYS = "ALWAYS"
     NOT_BLANK = "NOT_BLANK"
@@ -63,6 +90,20 @@ class TransformationType(str, Enum):
     PAD_LEFT = "pad_left"
     SUBSTRING = "substring"
     NEEDS_REVIEW = "needs_review"
+    CONCAT = "concat"
+    LOWER = "lower"
+    PAD_RIGHT = "pad_right"
+    IS_TEXT = "is_text"
+    IS_NUMBER = "is_number"
+    ADD = "add"
+    SUBTRACT = "subtract"
+    MULTIPLY = "multiply"
+    DIVIDE = "divide"
+    ROUND = "round"
+    COALESCE = "coalesce"
+    PROBABILITY_THRESHOLD = "probability_threshold"
+    TOP_K = "top_k"
+    SOFTMAX = "softmax"
 
 
 class TargetRef(BaseModel):
@@ -86,7 +127,9 @@ class MappingRule(BaseModel):
 class SourceTargetSpec(BaseModel):
     table: Optional[str] = None
     field: Optional[str] = None
-    transformations: List[TransformationType] = Field(default_factory=list)
+    lookups: List["LookupEntry"] = Field(default_factory=list)
+    filters: List["FilterEntry"] = Field(default_factory=list)
+    transformations: List["TransformationConfig | TransformationType"] = Field(default_factory=list)
 
 
 class ConstraintSpec(BaseModel):
@@ -152,6 +195,48 @@ class ProceduralRule(BaseModel):
     steps: List[str] = Field(default_factory=list)
 
 
+class LookupEntry(BaseModel):
+    rule_type: LookupRuleType
+    source_type: LookupSourceType
+    table: Optional[str] = None
+    field: Optional[str] = None
+    cond_value: Optional[str] = None
+    operator: LookupOperator = LookupOperator.NONE
+    expected_result: Optional[str] = None
+
+
+class FilterLogic(str, Enum):
+    AND = "AND"
+    OR = "OR"
+
+
+class FilterOperator(str, Enum):
+    EQUAL = "EQUAL"
+    NOT_EQUAL = "NOT_EQUAL"
+    IN = "IN"
+    NOT_IN = "NOT_IN"
+    GT = "GT"
+    GTE = "GTE"
+    LT = "LT"
+    LTE = "LTE"
+    CONTAINS = "CONTAINS"
+    STARTS_WITH = "STARTS_WITH"
+    ENDS_WITH = "ENDS_WITH"
+    REGEX = "REGEX"
+
+
+class FilterEntry(BaseModel):
+    field: str
+    operator: FilterOperator
+    value: Optional[str] = None
+    logic: FilterLogic = FilterLogic.AND
+
+
+class TransformationConfig(BaseModel):
+    function: TransformationType
+    params: dict = Field(default_factory=dict)
+
+
 class CatalogMetadata(BaseModel):
     schema_version: str = "0.1.0"
     generated_at: datetime = Field(default_factory=datetime.utcnow)
@@ -163,6 +248,7 @@ class Catalog(BaseModel):
     validation_description: Optional[str] = None
     field_rules: List[FieldRule] = Field(default_factory=list)
     procedural_rules: List[ProceduralRule] = Field(default_factory=list)
+    lookups: List["LookupEntry"] = Field(default_factory=list)
     metadata: CatalogMetadata = Field(default_factory=CatalogMetadata)
 
 
@@ -182,6 +268,14 @@ __all__ = [
     "ProceduralRule",
     "RuleIntent",
     "RuleType",
+    "FilterEntry",
+    "FilterLogic",
+    "FilterOperator",
+    "LookupEntry",
+    "LookupRuleType",
+    "LookupOperator",
+    "LookupSourceType",
+    "TransformationConfig",
     "SeverityLevel",
     "SourceTargetSpec",
     "TargetRef",

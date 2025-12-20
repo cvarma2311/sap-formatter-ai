@@ -1,7 +1,1 @@
-{
-  "Product.ProductInternalID": {
-    "table": "Product",
-    "field": "ProductInternalID",
-    "relation_keys": "MARA_SRC.ReceiverProductInternalID"
-  }
-}
+{}

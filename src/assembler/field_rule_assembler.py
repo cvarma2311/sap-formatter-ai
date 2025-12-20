@@ -7,8 +7,11 @@ from src.data_models import (
     FieldRuleConfig,
     KeyConfig,
     SourceTargetSpec,
+    TransformationConfig,
     TransformationType,
     ValidationFunction,
+    LookupEntry,
+    FilterEntry,
 )
 from src.normalization.id_normalizer import make_unique_id
 
@@ -21,11 +24,17 @@ def assemble_field_rule(
     data_type: DataType,
     validation_function: ValidationFunction,
     constraints: Optional[ConstraintSpec],
-    transformations: List[TransformationType],
+    transformations: List[TransformationConfig | TransformationType],
+    lookups: List[LookupEntry],
+    filters: List[FilterEntry],
     relation_keys: str,
 ) -> FieldRule:
-    source_spec = SourceTargetSpec(table=table_name, field=field_name, transformations=transformations)
-    target_spec = SourceTargetSpec(table=target_table, field=target_field, transformations=[])
+    source_spec = SourceTargetSpec(
+        table=table_name, field=field_name, lookups=lookups, filters=filters, transformations=transformations
+    )
+    target_spec = SourceTargetSpec(
+        table=target_table, field=target_field, lookups=[], filters=[], transformations=[]
+    )
     key_config = KeyConfig(validation_function=validation_function, source=source_spec, target=target_spec)
     config = FieldRuleConfig(key_config=key_config, constraints=constraints)
     unique_id = make_unique_id(table_name, field_name)
@@ -37,4 +46,3 @@ def assemble_field_rule(
         data_type=data_type,
         config=config,
     )
-
