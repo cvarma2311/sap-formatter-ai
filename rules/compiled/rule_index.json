@@ -1,1 +1,62 @@
-{}
+{
+  "Product.BasicProductCode": {
+    "table": "Product",
+    "field": "BasicProductCode",
+    "relation_keys": "MARA_SRC.WRKST"
+  },
+  "Product.Description": {
+    "table": "Product",
+    "field": "Description",
+    "relation_keys": "MARA_SRC.MAKTX"
+  },
+  "Product.MX_CHAR": {
+    "table": "Product",
+    "field": "MX_CHAR",
+    "relation_keys": "ZMDGMMMXCHAR_SRC.ZMDG_MM_MAT_C_MX"
+  },
+  "Product.ProcurementTypeCode": {
+    "table": "Product",
+    "field": "ProcurementTypeCode",
+    "relation_keys": "MARC_SRC.MARC-BESKZ"
+  },
+  "Product.ProductGroupInternalID": {
+    "table": "Product",
+    "field": "ProductGroupInternalID",
+    "relation_keys": "MARA_SRC.MATKL"
+  },
+  "Product.ProductHierarchyInternalID": {
+    "table": "Product",
+    "field": "ProductHierarchyInternalID",
+    "relation_keys": "MARA_SRC.PRDHA"
+  },
+  "Product.ProductInternalID": {
+    "table": "Product",
+    "field": "ProductInternalID",
+    "relation_keys": "MARA_SRC.ReceiverProductInternalID"
+  },
+  "Product.ProductStandardVariantID": {
+    "table": "Product",
+    "field": "ProductStandardVariantID",
+    "relation_keys": "MARA_SRC.NUMTP"
+  },
+  "Product.ProductTypeCode": {
+    "table": "Product",
+    "field": "ProductTypeCode",
+    "relation_keys": "MARA_SRC.MTART"
+  },
+  "Product.ZZHLGN": {
+    "table": "Product",
+    "field": "ZZHLGN",
+    "relation_keys": "MARA_SRC.ZZHLGN"
+  },
+  "Product.ZZMRP_CONTROLLER": {
+    "table": "Product",
+    "field": "ZZMRP_CONTROLLER",
+    "relation_keys": "MARC_SRC.MARC-DISPO"
+  },
+  "Product.ZZPURCHASING_GROUP": {
+    "table": "Product",
+    "field": "ZZPURCHASING_GROUP",
+    "relation_keys": "MARC_SRC.MARC-EKGRP"
+  }
+}

@@ -6,6 +6,7 @@ from pydantic import ValidationError
 
 from src.agents.chunking_agent import normalize_chunking
 from src.agents.defaulting_agent import normalize_defaults
+from src.agents.filter_agent import parse_filters
 from src.agents.identity_agent import resolve_identity
 from src.agents.intent_classifier import classify_intent
 from src.agents.lookup_agent import parse_lookup_entries

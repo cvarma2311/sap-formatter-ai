@@ -33,6 +33,9 @@ def load_rules(path: Path, rule_id: Optional[str] = None) -> Tuple[List[MappingR
             logger.warning("No rules found matching id=%s", rule_id)
     parsed: List[MappingRule] = []
     for entry in raw_rules:
+        if not entry.get("target"):
+            logger.warning("Skipping mapping rule %s: missing target", entry.get("id"))
+            continue
         try:
             parsed.append(MappingRule.model_validate(entry))
         except ValidationError as exc:
@@ -40,4 +43,3 @@ def load_rules(path: Path, rule_id: Optional[str] = None) -> Tuple[List[MappingR
             continue
     input_hash = hash_dict(raw_rules)
     return parsed, input_hash
-
